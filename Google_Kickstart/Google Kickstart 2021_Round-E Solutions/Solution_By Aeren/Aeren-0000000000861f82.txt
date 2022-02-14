@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std;
+template<class T, class U> T &ctmax(T &x, const U &y){ return x = max<T>(x, y); }
+template<class T, class U> T &ctmin(T &x, const U &y){ return x = min<T>(x, y); }
+
+
+
+int main(){
+	cin.tie(0)->sync_with_stdio(0);
+	cin.exceptions(ios::badbit | ios::failbit);
+	auto __solve_tc = [&](auto __tc_num)->int{
+		int r, c, k, r1, c1, r2, c2;
+		cin >> r >> c >> k >> r1 >> c1 >> r2 >> c2, -- r1, -- c1;
+		long long base = 0;
+		vector<int> pool;
+		if(r1){
+			base += (c2 - c1 + k - 1) / k;
+			pool.push_back((min(c2, c - c1) + k - 1) / k - (c2 - c1 + k - 1) / k);
+		}
+		if(c1){
+			base += (r2 - r1 + k - 1) / k;
+			pool.push_back((min(r2, r - r1) + k - 1) / k - (r2 - r1 + k - 1) / k);
+		}
+		if(r2 < r){
+			base += (c2 - c1 + k - 1) / k;
+			pool.push_back((min(c2, c - c1) + k - 1) / k - (c2 - c1 + k - 1) / k);
+		}
+		if(c2 < c){
+			base += (r2 - r1 + k - 1) / k;
+			pool.push_back((min(r2, r - r1) + k - 1) / k - (r2 - r1 + k - 1) / k);
+		}
+		if(!pool.empty()){
+			base += *min_element(pool.begin(), pool.end());
+		}
+		r = r2 - r1, c = c2 - c1;
+		long long res = numeric_limits<long long>::max();
+		for(auto rep = 2; rep; -- rep){
+			ctmin(res, 1LL * (r - 1) * ((c + k - 1) / k) + 1LL * ((c - 1) / k) * ((r + k - 1) / k) + 1LL * (c - 1 - (c - 1) / k) * r);
+			swap(r, c);
+		}
+		res += base;
+		cout << res << "\n";
+		return 0;
+	};
+	int __tc_cnt;
+	cin >> __tc_cnt;
+	for(auto __tc_num = 0; __tc_num < __tc_cnt; ++ __tc_num){
+		cout << "Case #" << __tc_num + 1 << ": ";
+		__solve_tc(__tc_num);
+	}
+	return 0;
+}
+
+/*
+
+*/
+
+////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    //
+//                                   Coded by Aeren                                   //
+//                                                                                    //
+////////////////////////////////////////////////////////////////////////////////////////

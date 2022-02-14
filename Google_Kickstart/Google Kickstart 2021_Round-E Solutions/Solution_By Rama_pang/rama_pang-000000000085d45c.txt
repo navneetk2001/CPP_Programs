@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Disjoint {
+ public:
+  vector<int> dsu;
+  Disjoint(int n) : dsu(n, -1) {}
+  int Find(int x) {
+    return dsu[x] < 0 ? x : dsu[x] = Find(dsu[x]);
+  } 
+  int Unite(int x, int y) {
+    x = Find(x), y = Find(y);
+    if (x != y) {
+      dsu[x] += dsu[y];
+      dsu[y] = x;
+      return 1;
+    }
+    return 0;
+  }
+};
+
+void Main() {
+  int N, M;
+  cin >> N >> M;
+  vector<string> A(N);
+  for (int i = 0; i < N; i++) {
+    cin >> A[i];
+  }
+  const auto id = [&](int i, int j) { return i * M + j; };
+  Disjoint D(N * M);
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) if (A[i][j] != '#') {
+      int k = j;
+      while (k + 1 < M && A[i][k + 1] != '#') {
+        k += 1;
+      }
+      for (int g = 0; g <= k - j; g++) {
+        D.Unite(id(i, j + g), id(i, k - g));
+      }
+      j = k;
+    }
+  }
+  for (int j = 0; j < M; j++) {
+    for (int i = 0; i < N; i++) if (A[i][j] != '#') {
+      int k = i;
+      while (k + 1 < N && A[k + 1][j] != '#') {
+        k += 1;
+      }
+      for (int g = 0; g <= k - i; g++) {
+        D.Unite(id(i + g, j), id(k - g, j));
+      }
+      i = k;
+    }
+  }
+  int ans = 0;
+  map<int, char> let;
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+      int x = D.Find(id(i, j));
+      if (A[i][j] != '#' && A[i][j] != '.') {
+        let[x] = A[i][j];
+      }
+    }
+  }
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+      int x = D.Find(id(i, j));
+      if (A[i][j] == '#') {
+      } else if (let.count(x)) {
+        ans += A[i][j] == '.';
+      } else {
+      }
+    }
+  }
+  cout << ans << '\n';
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+      int x = D.Find(id(i, j));
+      if (A[i][j] == '#') {
+        cout << A[i][j];
+      } else if (let.count(x)) {
+        cout << let[x];
+      } else {
+        cout << '.';
+      }
+    }
+    cout << '\n';
+  }
+  return;
+}
+
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  int T = 1;
+  cin >> T;
+  for (int t = 1; t <= T; t++) {
+    cout << "Case #" << t << ": ";
+    Main();
+  }
+  return 0;
+}

@@ -1,0 +1,14 @@
+10:L5 R20
+5:L3 R7
+20:L15 
+3:
+7:
+15:
+
+ After Deleting a node from the BST: 
+15:L5 R20
+5:L3 R7
+20:
+3:
+7:
+

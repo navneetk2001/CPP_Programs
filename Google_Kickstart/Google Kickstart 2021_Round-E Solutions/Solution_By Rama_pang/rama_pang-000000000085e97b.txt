@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAX = 1e8;
+double dp[MAX];
+
+void Main() {
+  long long N;
+  cin >> N;
+  cout << fixed << setprecision(12);
+  if (N < MAX) {
+    cout << dp[N] << '\n';
+  } else {
+    cout << (0.57721566490153286060651209008240243104215933593992 + log(N) + 0.5 / N) << '\n';
+  }
+}
+
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  for (int i = 1; i < MAX; i++) {
+    dp[i] = dp[i - 1] + 1.0 / i;
+  }
+
+  int T = 1;
+  cin >> T;
+  for (int t = 1; t <= T; t++) {
+    cout << "Case #" << t << ": ";
+    Main();
+  }
+  return 0;
+}

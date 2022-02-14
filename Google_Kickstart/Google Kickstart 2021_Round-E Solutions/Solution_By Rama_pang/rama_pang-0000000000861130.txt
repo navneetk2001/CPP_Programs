@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using lint = long long;
+
+lint Solve(int R, int C) {
+  if (R == 0 || C == 0) return 0;
+  return 1ll * R * C - 1;
+}
+
+lint SolveGen(int R, int C, int K) {
+  lint res = 0;
+  res += 2ll * ((R + K - 1) / K) * ((C + K - 1) / K) - ((R + K - 1) / K) - ((C + K - 1) / K);
+  res += 1ll * (R / K) * (C / K) * Solve(K, K);
+  res += 1ll * (R / K) * Solve(K, C % K);
+  res += 1ll * (C / K) * Solve(R % K, K);
+  res += Solve(R % K, C % K);
+  return res;
+}
+
+void Main() {
+  int R, C, K;
+  cin >> R >> C >> K;
+  int r1, c1, r2, c2;
+  cin >> r1 >> c1 >> r2 >> c2;
+  lint ans = 1e18;
+  for (int swp = 0; swp < 2; swp++) {
+    for (int rx = 0; rx < 2; rx++) {
+      for (int ry = 0; ry < 2; ry++) {
+        if (r1 > r2) swap(r1, r2);
+        if (c1 > c2) swap(c1, c2);
+
+        vector<int> cuts;
+        if (r1 != 1) cuts.emplace_back(c2);
+        if (c2 != C) cuts.emplace_back(r2 - r1 + 1);
+        if (r2 != R) cuts.emplace_back(c2 - c1 + 1);
+        if (c1 != 1) cuts.emplace_back(r2 - r1 + 1);
+
+        lint score = 0;
+        for (auto i : cuts) {
+          score += (i + K - 1) / K;
+        }
+        ans = min(ans, score);
+
+        c1 = C - c1 + 1;
+        c2 = C - c2 + 1;
+      }
+      r1 = R - r1 + 1;
+      r2 = R - r2 + 1;
+    }
+    swap(R, C);
+    swap(r1, c1);
+    swap(r2, c2);
+  }
+  if (r1 > r2) swap(r1, r2);
+  if (c1 > c2) swap(c1, c2);
+  ans += SolveGen(r2 - r1 + 1, c2 - c1 + 1, K);
+  cout << ans << '\n';
+}
+
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  int T = 1;
+  cin >> T;
+  for (int t = 1; t <= T; t++) {
+    cout << "Case #" << t << ": ";
+    Main();
+  }
+  return 0;
+}
