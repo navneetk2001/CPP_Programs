@@ -24,3 +24,68 @@ Output: 1
 Explanation: There is one 0-diff pair in the array, (1, 1).
 
 
+
+//Solution :-
+We can say nums[i]-nums[j] = k   
+    => nums[i] + k = nums[j]
+Now, we can use the binary search intuition to search nums[j] in right side of the array
+// Time Complexity :- O(nlogn)   // Space Complexity :- O(n)  
+class Solution {
+public:
+    int findPairs(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());    //sort the array first
+        set<pair<int,int>>st;              //use set to store unique value
+        int n=nums.size();                 // size of array
+
+        for(int i=0;i<n;i++){
+        	int lo=i+1;
+        	int hi=n-1;         
+        	int f=-1;            //flag for checking
+        	while(lo<=hi){       //using binary search intuition to search nums[i] + k in right side of the array
+        		int mid=(lo+hi)/2;
+        		if(nums[mid]==(nums[i]+k)){     //search nums[i] + k
+        			f=1;
+        			break;
+        		}
+        		else if(nums[mid]<(nums[i]+k)){
+        			lo=mid+1;
+        		}
+        		else{
+        			hi=mid-1;
+        		}
+        	}
+        	if(f==1){
+        		st.insert({nums[i], nums[i]+k});
+        	}
+        }
+
+        return st.size();
+    }
+};
+
+
+
+//Another Approach :- 
+//We can use the concept of hashing and search nums[i]+k in hashmap
+// Time Complexity :- O(n)   // Space Complexity :- O(n)   
+class Solution {
+public:
+    int findPairs(vector<int>& nums, int k) {
+        unordered_map<int,int>mp;
+        for(int i:nums)
+            mp[i]++;
+        int ans=0;
+        for(auto x:mp)
+        {
+            if(k==0)
+            {    
+                if(x.second>1)
+                ans++;
+            }
+             else if(mp.find(x.first+k)!=mp.end())
+                ans++;
+        }
+        
+        return ans;
+    }
+};

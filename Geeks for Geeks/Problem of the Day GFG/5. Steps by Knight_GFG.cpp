@@ -22,35 +22,35 @@ class Solution
 	int minStepToReachTarget(vector<int>&KnightPos,vector<int>&TargetPos,int N)
 	{   //Using BFS to find shortest path
 	    //steps a knight can go
-	int pos[8][2]={{-2,-1}, {-2,1}, {-1,2}, {1,2}, {2,-1}, {2,1}, {-1,-2}, {1,-2}};
-	bool vis[N+1][N+1];      //visited Array
-	memset(vis,0,sizeof(vis));
+		int pos[8][2]={{-2,-1}, {-2,1}, {-1,2}, {1,2}, {2,-1}, {2,1}, {-1,-2}, {1,-2}};
+		bool vis[N+1][N+1];      //visited Array
+		memset(vis,0,sizeof(vis));
 
-	vis[KnightPos[0]][KnightPos[1]]=1;   //Marking initial pos as true
-	queue<pair<int,int>> q;      //Queue for BFS Traversal
-	q.push({KnightPos[0], KnightPos[1]});
-	int steps=0;
+		vis[KnightPos[0]][KnightPos[1]]=1;   //Marking initial pos as true
+		queue<pair<int,int>> q;      //Queue for BFS Traversal
+		q.push({KnightPos[0], KnightPos[1]});
+		int steps=0;
 
-	while(!q.empty()){   
-		int sz=q.size();
-		while(sz--){
-		    pair<int,int>p=q.front();
-		    q.pop();
-			int x=p.first, y=p.second;
-			if(x==TargetPos[0] && y==TargetPos[1])
-				return steps;
+		while(!q.empty()){   
+			int sz=q.size();
+			while(sz--){
+			    pair<int,int>p=q.front();
+			    q.pop();
+				int x=p.first, y=p.second;
+				if(x==TargetPos[0] && y==TargetPos[1])
+					return steps;
 
-			for(int k=0;k<8;k++){
-				int a=x+pos[k][0], b=y+pos[k][1];
-				if(a>0 && a<=N && b>0 && b<=N && !vis[a][b]){
-					q.push({a,b});
-					vis[a][b]=1;
+				for(int k=0;k<8;k++){
+					int a=x+pos[k][0], b=y+pos[k][1];
+					if(a>0 && a<=N && b>0 && b<=N && !vis[a][b]){
+						q.push({a,b});
+						vis[a][b]=1;
+					}
 				}
 			}
+			steps++;
 		}
-		steps++;
-	}
-	return -1;
+		return -1;
 	}
 };
 
