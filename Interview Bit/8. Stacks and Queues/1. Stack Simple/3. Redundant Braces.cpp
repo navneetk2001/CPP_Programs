@@ -1,16 +1,16 @@
-Given a string A denoting an expression. It contains the following operators '+', '-', '', '/'.
-Chech whether A has redundant braces or not.
-NOTE: A will be always a valid expression.
+// Given a string A denoting an expression. It contains the following operators '+', '-', '', '/'.
+// Chech whether A has redundant braces or not.
+// NOTE: A will be always a valid expression.
 
 //Solution Approach :-
-If we somehow pick out sub-expressions surrounded by ( and ), then if we are left with () as a part of the string, we know we have redundant braces.
-Lets take an example:
-(a+(a+b))
-We keep pushing elements onto the stack till we encounter ')'. When we do encounter ')', we start popping elements till we find a matching '('. 
-If the number of elements popped do not correspond to '()', we are fine and we can move forward. 
-Otherwise, voila! Matching braces have been found. 
-Some Extra Hints:
-Try to run your code on test cases like (a*(a))  and (a) ??
+// If we somehow pick out sub-expressions surrounded by ( and ), then if we are left with () as a part of the string, we know we have redundant braces.
+// Lets take an example:
+// (a+(a+b))
+// We keep pushing elements onto the stack till we encounter ')'. When we do encounter ')', we start popping elements till we find a matching '('. 
+// If the number of elements popped do not correspond to '()', we are fine and we can move forward. 
+// Otherwise, voila! Matching braces have been found. 
+// Some Extra Hints:
+// Try to run your code on test cases like (a*(a))  and (a) ??
 
 
 //First Solution :-

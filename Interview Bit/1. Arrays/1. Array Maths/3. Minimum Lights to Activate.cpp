@@ -3,6 +3,19 @@
 // Initially all lights are off.
 // Return the minimum number of lights to be turned ON to light the whole corridor or -1 if the whole corridor cannot be lighted.
 
+// Input 1:
+// A = [ 0, 0, 1, 1, 1, 0, 0, 1].
+// B = 3
+// Output 1: 2
+// Explanation 1: In the first configuration, Turn on the lights at 3rd and 8th index. 
+// Light at 3rd index covers from [ 1, 5] and light at 8th index covers [ 6, 8].
+
+// Input 2:
+// A = [ 0, 0, 0, 1, 0].
+// B = 3
+// Output 2: -1
+// Explanation 2: In the second configuration, there is no light which can light the first corridor.
+
 
 int Solution::solve(vector<int> &A, int B) {
     int count =0;
@@ -62,23 +75,23 @@ int Solution::solve(vector<int> &A, int B) {
 //Second Method :- 
 int Solution::solve(vector<int> &A, int B) {
     int n = (int)A.size(), i = 0, ans = 0;
-    if(B == 0)
+    if(B == 0){
         return -1;
-    //Start from 0th index
-    while(i<n)
-    {
+    }
+    
+    while(i<n){    //Start from 0th index
         int idx = -1;
         //check range [X-B+1, X+B-1] and find rightmost bulb
-        for(int j=max(0, i-B+1);j<min(n,i+B);j++)
-        {
+        for(int j=max(0, i-B+1);j<min(n,i+B);j++){
             if(A[j] == 1)
                 idx = j;
         }
-        if(idx == -1)
+        if(idx == -1){
             return -1;
+        }
         ans++;
-        //Start now from index which is outside the current selected bulb
-        i = idx+B;
+        
+        i = idx+B;    //Start now from index which is outside the current selected bulb
     }
     return ans;
 }
@@ -89,17 +102,17 @@ int Solution::solve(vector<int> &A, int B) {
 
 //Third Method :- 
 int Solution::solve(vector<int> &A, int B) {
-int n=A.size();
-int i=0;
-int result=0;
-bool flag=false;
-while(i<n)
-{
-    int a=max(0,i-B+1);
-    int b=min(n-1,i+B-1);
-    for(;b>=a;b--)
+    int n=A.size();
+    int i=0;
+    int result=0;
+    bool flag=false;
+    while(i<n)
     {
-        if(A[b]==1)
+        int a=max(0,i-B+1);
+        int b=min(n-1,i+B-1);
+        for(;b>=a;b--)
+        {
+            if(A[b]==1)
             {
                 result++;
                 flag=true;
@@ -107,8 +120,9 @@ while(i<n)
             break;
             }
         }
-        if(flag==false) return -1;
+        if(flag==false) 
+            return -1;
         flag=false;
     }
-return result;
+    return result;
 }

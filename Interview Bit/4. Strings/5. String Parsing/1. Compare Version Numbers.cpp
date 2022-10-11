@@ -1,29 +1,29 @@
-Compare two version numbers version1 and version2.
-If version1 > version2 return 1,
-If version1 < version2 return -1,
-otherwise return 0.
-You may assume that the version strings are non-empty and contain only digits and the . character.
-The . character does not represent a decimal point and is used to separate number sequences.
-For instance, 2.5 is not "two and a half" or "half way to version three", it is the fifth second-level revision of the second first-level revision.
+// Compare two version numbers version1 and version2.
+// If version1 > version2 return 1,
+// If version1 < version2 return -1,
+// otherwise return 0.
+// You may assume that the version strings are non-empty and contain only digits and the . character.
+// The . character does not represent a decimal point and is used to separate number sequences.
+// For instance, 2.5 is not "two and a half" or "half way to version three", it is the fifth second-level revision of the second first-level revision.
 
-Here is an example of version numbers ordering:
-0.1 < 1.1 < 1.2 < 1.13 < 1.13.4
+// Here is an example of version numbers ordering:
+// 0.1 < 1.1 < 1.2 < 1.13 < 1.13.4
 
-Input: version1 = "1.01", version2 = "1.001"
-Output: 0
-Explanation: Ignoring leading zeroes, both "01" and "001" represent the same integer "1".
+// Input: version1 = "1.01", version2 = "1.001"
+// Output: 0
+// Explanation: Ignoring leading zeroes, both "01" and "001" represent the same integer "1".
 
-Input: version1 = "1.0", version2 = "1.0.0"
-Output: 0
-Explanation: version1 does not specify revision 2, which means it is treated as "0".
+// Input: version1 = "1.0", version2 = "1.0.0"
+// Output: 0
+// Explanation: version1 does not specify revision 2, which means it is treated as "0".
 
-Input: version1 = "0.1", version2 = "1.1"
-Output: -1
-Explanation: version1's revision 0 is "0", while version2's revision 0 is "1". 0 < 1, so version1 < version2.
+// Input: version1 = "0.1", version2 = "1.1"
+// Output: -1
+// Explanation: version1's revision 0 is "0", while version2's revision 0 is "1". 0 < 1, so version1 < version2.
 
 
 //Solution Approach :-
-Can you split two versions on ‘.’? How can it help you?
+//Can you split two versions on ‘.’? How can it help you?
 
 
 // First Method :-
@@ -37,13 +37,11 @@ int Solution::compareVersion(string A, string B) {
         while(j<m and B[j]!='.') s2+=B[j],j++;
         i++,j++;
         
-        if(s1.empty())
-        {
+        if(s1.empty()){
             if(stold(s2)==0) continue;
             else return -1;
         }
-        if(s2.empty())
-        {
+        if(s2.empty()){
             if(stold(s1)==0) continue;
             else return 1;
         }
@@ -201,16 +199,10 @@ int Solution::compareVersion(string A, string B) {
         j++;
     }
     
-    if(i>=A.length() && j>=B.length())
+    if(i>=A.length() && j>=B.length()){
         return 0;
+    }
     
     return i>j ? 1 : -1;
 }
-
-
-
-
-
-
-
 

@@ -6,16 +6,16 @@
 // Note: INT_MAX = 2^31 - 1
 
 //Hint :-
-dividend = answer * divisor + c
-You need to find the answer here without using any of the operators mentioned in the question. Think about the binary expansion of answer.
-We can work with bits without using the standard operators. If you can find what bits are set in answer you will be done.
+// dividend = answer * divisor + c
+// You need to find the answer here without using any of the operators mentioned in the question. Think about the binary expansion of answer.
+// We can work with bits without using the standard operators. If you can find what bits are set in answer you will be done.
 
 //Solution Approach :- 
-Think in terms of bits.
-How do you do the division with bits?
-How do you determine the most significant bit in the answer?
-Iterate on the bit position ‘i’ from 31 to 1 and find the first bit for which divisor«i is less than dividend.
-How do you use (1) to move forward in similar fashion?
+// Think in terms of bits.
+// How do you do the division with bits?
+// How do you determine the most significant bit in the answer?
+// Iterate on the bit position ‘i’ from 31 to 1 and find the first bit for which divisor«i is less than dividend.
+// How do you use (1) to move forward in similar fashion?
 
 
 //First Solution :-
@@ -37,8 +37,12 @@ int Solution::divide(int A, int B) {
         }
     }
 
-    if(sign==1) ans=-ans;
-    if(ans>INT_MAX || ans<INT_MIN) return INT_MAX;
+    if(sign==1) {
+        ans=-ans;
+    }
+    if(ans>INT_MAX || ans<INT_MIN) {
+        return INT_MAX;
+    }
     return ans;
 
 }

@@ -18,17 +18,17 @@
 //  After 4 sec: Node 4, 2, 1, 3, 5, 6(whole tree) will be burnt.
 
 //Hint :-
-The idea is to store additional information for every node:
--> Depth of left subtree.
--> Depth of right subtree.
--> The time required for the fire to reach the current node starting from the first leaf node burned.
--> A boolean variable to check if the initial burnt node is in the tree rooted under current node.
+// The idea is to store additional information for every node:
+// -> Depth of left subtree.
+// -> Depth of right subtree.
+// -> The time required for the fire to reach the current node starting from the first leaf node burned.
+// -> A boolean variable to check if the initial burnt node is in the tree rooted under current node.
 
 //Solution Approach :- 
-Now, for the minimum time required to burn any subtree will be:
-    The time required for fire to reach the root node from initial burnt leaf + depth of the opposite side
-Therefore, to find time required to burn the complete tree, we need to calculate the above value for every node, and take maximum of that value.
-    ans = max(ans, (time required for fire to reach current node + depth of other subtree))
+// Now, for the minimum time required to burn any subtree will be:
+//     The time required for fire to reach the root node from initial burnt leaf + depth of the opposite side
+// Therefore, to find time required to burn the complete tree, we need to calculate the above value for every node, and take maximum of that value.
+//     ans = max(ans, (time required for fire to reach current node + depth of other subtree))
 
 
 //Solution :- Using height and depth
@@ -36,8 +36,9 @@ Therefore, to find time required to burn the complete tree, we need to calculate
 static int ans =-1;
 
 int burn(TreeNode* root, int target, int &depth){
-	if(!root) 
+	if(!root) {
 		return 0;
+    }
 	if(root->val==target){
 		depth=1;
 		return 1;
@@ -87,6 +88,7 @@ int fun(TreeNode* root, int &res, int B){
 	res= max(ans, res);
 	return temp;
 }
+
 int Solution::solve(TreeNode* A, int B) {
 	int res=0;
 	fun(A, res, B);

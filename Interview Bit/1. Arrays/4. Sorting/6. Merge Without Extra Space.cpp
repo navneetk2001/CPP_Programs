@@ -4,8 +4,6 @@
 
 
 
-
-
 class Solution{
 public:
 	void merge(int arr1[], int arr2[], int n, int m) {
@@ -25,21 +23,15 @@ public:
 
 
 
-
-
-
-
-
-/ Merging two sorted arrays with O(1)
-// extra space
+// Merging two sorted arrays with O(1) extra space
 #include <bits/stdc++.h>
 using namespace std;
 
-// Function to find next gap.
 int nextGap(int gap)
 {
-	if (gap <= 1)
+	if (gap <= 1){
 		return 0;
+	}
 	return (gap / 2) + (gap % 2);
 }
 
@@ -67,7 +59,6 @@ void merge(int* arr1, int* arr2, int n, int m)
 	}
 }
 
-// Driver code
 int main()
 {
 	int a1[] = { 10, 27, 38, 43, 82 };
@@ -80,11 +71,12 @@ int main()
 
 	printf("First Array: ");
 	for (int i = 0; i < n; i++)
-	printf("%d ", a1[i]);
+		printf("%d ", a1[i]);
 
 	printf("\nSecond Array: ");
 	for (int i = 0; i < m; i++)
-	printf("%d ", a2[i]);
+		printf("%d ", a2[i]);
+	
 	printf("\n");
 	return 0;
 }

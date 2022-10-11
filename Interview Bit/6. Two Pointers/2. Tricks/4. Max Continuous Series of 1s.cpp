@@ -7,25 +7,24 @@
 // Array = {1 1 0 1 1 0 0 1 1 1 } 
 // M = 1
 
-// Output : 
-// [0, 1, 2, 3, 4] 
+// Output :  [0, 1, 2, 3, 4] 
 // If there are multiple possible solutions, return the sequence which has the minimum start index.
 
 //Hint 
-Hint : Think in terms of 2 pointers.
-Would it help if you maintained the number of 0s in the current range ? When would you range become invalid ?
+// Hint : Think in terms of 2 pointers.
+// Would it help if you maintained the number of 0s in the current range ? When would you range become invalid ?
 
 //Solution Approach :-
-N : 4
-lis : 1 0 1 0 
-M : 2
-pointer i and j 
-i = j = 0
-iterate till i < N:
-        if(Number_of_Zeros_in_Current_range > M) :
-                increment j and reduce range till Number_of_Zeros_in_current_range < M
-        else :
-                add element in range and update all variables
+// N : 4
+// lis : 1 0 1 0 
+// M : 2
+// pointer i and j 
+// i = j = 0
+// iterate till i < N:
+//         if(Number_of_Zeros_in_Current_range > M) :
+//                 increment j and reduce range till Number_of_Zeros_in_current_range < M
+//         else :
+//                 add element in range and update all variables
 
 //First Solution
 vector<int> Solution::maxone(vector<int> &A, int B) {
@@ -40,9 +39,8 @@ vector<int> Solution::maxone(vector<int> &A, int B) {
             flips++;
         }
         while(flips > B){
-            //unflip previous 0 because you can't move forward
-            if(A[j]==0){
-                flips--;
+            if(A[j]==0){    //unflip previous 0 because you can't move forward
+                flips--; 
             }
             j++;
         }

@@ -41,18 +41,18 @@
 
 
 //Hint :-
-This is more of a parsing/simulation problem. Think about the corner cases wisely.
+//This is more of a parsing/simulation problem. Think about the corner cases wisely.
 
 //Solution Approach :-
-This is more of a parsing problem.
-Make sure you take a lot of time thinking about the corner cases and structure of the code before you start coding.
-Fixing corner cases on the fly can make your code really ugly.
-Note the following:
-1. ‘{‘, ‘[’ have the same effect on the printing
-2. '}', ‘]’ have the same effect as well
-3. ‘:’ and ‘,’ are the only other 2 characters that matter.
-Think about the behavior when you encounter the following characters.
-Also think about the behavior based on the following character.
+// This is more of a parsing problem.
+// Make sure you take a lot of time thinking about the corner cases and structure of the code before you start coding.
+// Fixing corner cases on the fly can make your code really ugly.
+// Note the following:
+// 1. ‘{‘, ‘[’ have the same effect on the printing
+// 2. '}', ‘]’ have the same effect as well
+// 3. ‘:’ and ‘,’ are the only other 2 characters that matter.
+// Think about the behavior when you encounter the following characters.
+// Also think about the behavior based on the following character.
 
 
 //First Solution :-
@@ -62,8 +62,9 @@ vector<string> Solution::prettyJSON(string str) {
 	int cnt = 0;
 
 	for(int i = 0; i < (int)str.size(); i++) {
-	    if(str[i] == ' ') 
+	    if(str[i] == ' ') {
 	    	continue;
+        }
 	    else if(str[i] == '{') {
 	        ans.push_back(temp);
 	        ans[(int)ans.size() - 1].push_back('{');
@@ -149,8 +150,9 @@ vector<string> Solution::prettyJSON(string s) {
 		if(ch==' ')
 		    continue;
 
-		if(ch=='}' ||ch==']' )
+		if(ch=='}' ||ch==']' ){
 		    indent--;
+        }
 
 		if(last=='[' ||  last == '{' || ch==']' || ch == '}' || last == ',' || (last==':' && (ch=='{' || ch=='['))){
 		    res.push_back(ans);
@@ -161,8 +163,9 @@ vector<string> Solution::prettyJSON(string s) {
 		    }
 		}
 
-		if(ch=='[' || ch=='{')
+		if(ch=='[' || ch=='{'){
 		    indent++;
+        }
 
 		ans += ch;
 		last = ch;
@@ -177,8 +180,9 @@ vector<string> Solution::prettyJSON(string s) {
 //Fourth Solution :-
 void addLine(string& line, vector<string>& ans)
 {
-    if(line.size() != 0)
+    if(line.size() != 0){
         ans.push_back(line);
+    }
     line.clear();
     
     return;

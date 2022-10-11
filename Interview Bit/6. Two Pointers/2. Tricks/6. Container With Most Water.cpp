@@ -13,25 +13,25 @@
 
 
 //Hint 
-Area will be basically min(ai,aj)*(j-i) where j>i.
-Approach 1 (in direction of O(n)) :
-Will the area be maximum if you take j-i to be maximum. If not, then can you reduce the problem to simpler set?
+// Area will be basically min(ai,aj)*(j-i) where j>i.
+// Approach 1 (in direction of O(n)) :
+// Will the area be maximum if you take j-i to be maximum. If not, then can you reduce the problem to simpler set?
 
-Approach 2 (in direction of O(nlogn)) :
-Sort the elements with their indexes in descending order. Start iterating from first position of sorted array while maintaing the maximum of answer. How?
+// Approach 2 (in direction of O(nlogn)) :
+// Sort the elements with their indexes in descending order. Start iterating from first position of sorted array while maintaing the maximum of answer. How?
 
 //Solution Approach :-
-Description of approach 1:
-Note 1: When you consider a1 and aN, then the area is (N-1) * min(a1, aN).
-Note 2: The base (N-1) is the maximum possible.
-This implies that if there was a better solution possible, it will definitely have height greater than min(a1, aN).
-B * H > (N-1) * min(a1, aN)
-We know that, B < (N-1)
-So, H > min(a1, aN)
+// Description of approach 1:
+// Note 1: When you consider a1 and aN, then the area is (N-1) * min(a1, aN).
+// Note 2: The base (N-1) is the maximum possible.
+// This implies that if there was a better solution possible, it will definitely have height greater than min(a1, aN).
+// B * H > (N-1) * min(a1, aN)
+// We know that, B < (N-1)
+// So, H > min(a1, aN)
 
-This means that we can discard min(a1, aN) from our set and look to solve this problem again from the start.
-If a1 < aN, then the problem reduces to solving the same thing for a2, aN.
-Else, it reduces to solving the same thing for a1, aN-1
+// This means that we can discard min(a1, aN) from our set and look to solve this problem again from the start.
+// If a1 < aN, then the problem reduces to solving the same thing for a2, aN.
+// Else, it reduces to solving the same thing for a1, aN-1
 
 
 //First Solution
@@ -67,7 +67,8 @@ int Solution::maxArea(vector<int> &A) {
         mx = max(currMax, mx);
         if(A[i]<A[j]){
             i++;
-        }else {
+        }
+        else {
             j--;
         }
     }

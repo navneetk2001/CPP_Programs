@@ -7,22 +7,24 @@
 // Try doing it using constant additional space.
 
 //Solution Approach
-Obviously, since we do not have back pointers, reaching the end node and then making our way back is not an option.
+// Obviously, since we do not have back pointers, reaching the end node and then making our way back is not an option.
 
-There are 2 approaches :
-1) Find out the length of the list in one go. Then you know the number of node to be removed. Traverse to the node and remove it.
-2) Make the first pointer go n nodes. Then move the second and first pointer simultaneously. This way, the first pointer is always ahead of the second pointer by n nodes. So when first pointer reaches the end, you are on the node to be removed.
+// There are 2 approaches :
+// 1) Find out the length of the list in one go. Then you know the number of node to be removed. Traverse to the node and remove it.
+// 2) Make the first pointer go n nodes. Then move the second and first pointer simultaneously. This way, the first pointer is always ahead of the second pointer by n nodes. So when first pointer reaches the end, you are on the node to be removed.
 
 
 // First Method :-
 ListNode* Solution::removeNthFromEnd(ListNode* A, int B) {
     if(A == NULL || B == 0) return A;
     int len=0;
+
     ListNode* temp=A;
     while(temp!=NULL){
-        len++;
+        len++;           //count no of nodes in list
         temp=temp->next;
     }
+
     //If B is greater than or = to length, delete first Node
     if(B >= len){
         A = A->next;
@@ -30,10 +32,10 @@ ListNode* Solution::removeNthFromEnd(ListNode* A, int B) {
     }
 
     ListNode* prev = NULL;
-    temp=A;
+    temp = A;
     for(int i=0;i<len-B;i++){
-        prev=temp;
-        temp=temp->next;
+        prev = temp;
+        temp = temp->next;
     }
     prev->next=temp->next;
     temp->next=NULL;
@@ -43,10 +45,10 @@ ListNode* Solution::removeNthFromEnd(ListNode* A, int B) {
 
 
 //Second Method :-
-ListNode* Solution::removeNthFromEnd(ListNode* A, int B) 
-{
-    ListNode*fast=A;
-    ListNode*slow=A;
+ListNode* Solution::removeNthFromEnd(ListNode* A, int B) {
+    ListNode* fast = A;
+    ListNode* slow = A;
+
     for(int i=0;i<B;i++)
     {
         fast=fast->next;
@@ -66,9 +68,7 @@ ListNode* Solution::removeNthFromEnd(ListNode* A, int B)
 
 
 //Third Method :-
-ListNode* Solution::removeNthFromEnd(ListNode* head, int n) 
-{
-    
+ListNode* Solution::removeNthFromEnd(ListNode* head, int n) {
     ListNode*temp=head,*curr=head,*prev;
     if(!head)return NULL;
     while(n--&&curr)

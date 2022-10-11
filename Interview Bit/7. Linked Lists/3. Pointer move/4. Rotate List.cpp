@@ -5,44 +5,41 @@
 
 
 //Hint 1
-Note 1: n may be a number larger than the size of the list.
-Note 2: Try to figure out the steps for the rotation if you know the new start node, the actual end node and the node previous to the new start node.
+// Note 1: n may be a number larger than the size of the list.
+// Note 2: Try to figure out the steps for the rotation if you know the new start node, the actual end node and the node previous to the new start node.
 
 //Solution Approach
-Since n may be a large number compared to the length of list. So we need to know the length of linked list. After that, move the list after the (l-n % l )th node to the front to finish the rotation.
-Ex: {1,2,3} k = 2 Move the list after the 1st node to the front
-Ex: {1,2,3} k = 5, In this case Move the list after (3-5 % 3=1)st node to the front.
-So the code has three parts.
-1) Get the length
-2 Move to the (l-n%l)th node
-3 Do the rotation
+// Since n may be a large number compared to the length of list. So we need to know the length of linked list. After that, move the list after the (l-n % l )th node to the front to finish the rotation.
+// Ex: {1,2,3} k = 2 Move the list after the 1st node to the front
+// Ex: {1,2,3} k = 5, In this case Move the list after (3-5 % 3=1)st node to the front.
+// So the code has three parts.
+// 1) Get the length
+// 2 Move to the (l-n%l)th node
+// 3 Do the rotation
 
 
 // First Method :-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
 ListNode* Solution::rotateRight(ListNode* A, int B) {
-    if(A == NULL)
+    if(A == NULL){
         return A;
+    }
     
-    int len=1;
+    int len = 1;
     ListNode* temp=A;
-    while(temp->next!=NULL){
+    while(temp->next!=NULL){    //reach to last element so that first of all we connect last->next to head.
         len++;
         temp=temp->next;
     }
 
-    temp->next=A;
-    if(B>len) B=B%len;
+    temp->next = A;   //connect last element with head of linked list
+    if(B > len){
+        B=B%len;
+    }
 
-    for(int i = 0; i < len-B; i++)
+    //Now we have to break the connection from len-k and make it null
+    for(int i = 0; i < len-B; i++){
         temp= temp->next;
+    }
         
     ListNode *ans = temp->next;
     temp->next = NULL;
@@ -123,13 +120,13 @@ ListNode* Solution::rotateRight(ListNode* A, int B) {
 
 
 //Fourth Method :-
-//Given a linked list of length N and an integer K , append the last 
-//K elements of a linked list to the front. Note that K can be greater than N.
+//Given a linked list of length N and an integer K , append the last K elements of a linked list to the front. Note that K can be greater than N.
 node *appendK(node *head, int k)
 {
     node *oldHead = head;
     node *fast = head;
     node *slow = head;
+
     for (int i = 0; i < k && fast->next != NULL; i++)
     {
         fast = fast->next;

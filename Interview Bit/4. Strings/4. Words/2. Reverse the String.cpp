@@ -7,11 +7,11 @@
 
 
 //Solution Approach
-One simple approach is a two-pass solution:
-First pass to split the string by spaces into an array of words
-Then second pass to extract the words in reversed order
-We can do better in one-pass. While iterating the string in reverse order, we keep track of a word’s beginning and end position.
-When we are at the beginning of a word, we append it.
+// One simple approach is a two-pass solution:
+// First pass to split the string by spaces into an array of words
+// Then second pass to extract the words in reversed order
+// We can do better in one-pass. While iterating the string in reverse order, we keep track of a word’s beginning and end position.
+// When we are at the beginning of a word, we append it.
 
 
 // First Method :-
@@ -20,12 +20,14 @@ string Solution::solve(string s) {
     int i,j,n=s.length();
     i=0;
     while(i<n){
-        while(i<n && s[i]==' ')   // Do not include leading spaces
+        while(i<n && s[i]==' '){  // Do not include leading spaces
             i++;
-
+        }
+        
         j=i;
-        while(j<n && s[j]!=' ')   //Till when we do not reach a space, means we are currently on a word
+        while(j<n && s[j]!=' '){   //Till when we do not reach a space, means we are currently on a word
             j++;
+        }
         
         ans=" "+s.substr(i,j-i)+ans;   // Here j is pointing to the next index of the ending of the current word, Due to this when passing length as 2nd parameter in substr fn, We pass j-i not j-i+1
         i=j+1;
@@ -33,8 +35,9 @@ string Solution::solve(string s) {
 
     // Remove leading spaces
     i=0;
-    while(i<n && ans[i]==' ')
+    while(i<n && ans[i]==' '){
         i++;
+    }
     ans=ans.substr(i);
     return ans;
 }
@@ -57,25 +60,23 @@ public:
 
 //Third Method :-
 string Solution::solve(string A) {
-        stringstream ss(A);
-        stack<string> st;
-        string word;
-        while(ss>>word)
-        {
-            st.push(word);
-        }
-        string op;
-        while(st.size())
-        {
-            string s2=st.top();
-            st.pop();
-            op+=s2;
-            op+=" ";
-        }
-        op.pop_back();
-        return op;
-
+    stringstream ss(A);
+    stack<string> st;
+    string word;
+    while(ss>>word){
+        st.push(word);
     }
+    
+    string op;
+    while(st.size()){
+        string s2=st.top();
+        st.pop();
+        op+=s2;
+        op+=" ";
+    }
+    op.pop_back();
+    return op;
+}
 
 //Fourth Method :-
 void Solution::reverseWords(string &A) {

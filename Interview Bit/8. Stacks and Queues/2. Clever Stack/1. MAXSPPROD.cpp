@@ -2,7 +2,7 @@
 // LeftSpecialValue: For an index i, it is defined as the index j such that A[j]>A[i] and (i>j). If multiple A[j]'s are present in multiple positions, the LeftSpecialValue is the maximum value of j.
 // RightSpecialValue: For an index i, it is defined as the index j such that A[j]>A[i] and (j>i). If multiple A[j]'s are present in multiple positions, the RightSpecialValue is the minimum value of j.
 // Write a program to find the maximum special product of any integer in the array.
-// NOTE:  As the answer can be large, output your answer modulo 109 + 7.
+// NOTE:  As the answer can be large, output your answer modulo 10^9 + 7.
 
 // Input 1:
 //  A = [1, 4, 3, 4]
@@ -15,20 +15,20 @@
 //  0
 
 //Hint :-
-We need to solve only one of the task of calculating LeftSpecialValue.
-RightSpecialValue calculation will follow similar approach.
-Try to think with the help of stack. How can you process every element such that it is being pushed and popped out of stack at max one time?
+// We need to solve only one of the task of calculating LeftSpecialValue.
+// RightSpecialValue calculation will follow similar approach.
+// Try to think with the help of stack. How can you process every element such that it is being pushed and popped out of stack at max one time?
 
 //Solution Approach :-
-Ok, lets try to calculate LeftSpecialValue.
+// Ok, lets try to calculate LeftSpecialValue.
 
-Lets make a stack A.
-We will keep elements in strictly decreasing order in stack A.
-When processing the ith element remove all the elements from the stack which have value less than or equal to ith element.
-Now whatever element will remain at the top of index will give the index corresponding to LeftSpecialValue. If no element is at top then take it as 0.
-Push ith element in stack A now.
-You can see each element is pushed and popped for atmax one time. Hence the solution runs in O(n) time.
-Do the similar thing for RightSpecialValue.
+// Lets make a stack A.
+// We will keep elements in strictly decreasing order in stack A.
+// When processing the ith element remove all the elements from the stack which have value less than or equal to ith element.
+// Now whatever element will remain at the top of index will give the index corresponding to LeftSpecialValue. If no element is at top then take it as 0.
+// Push ith element in stack A now.
+// You can see each element is pushed and popped for atmax one time. Hence the solution runs in O(n) time.
+// Do the similar thing for RightSpecialValue.
 
 
 //First Solution :-

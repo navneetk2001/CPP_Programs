@@ -1,12 +1,10 @@
 //  Given a string A with lowercase english alphabets and you have to return a string in which, with each character its frequency is written in adjacent.
-// Input 1:
-// abbhuabcfghh
-// Ouput 1:
-// a2b3h3u1c1f1g1
 
+// Input 1: abbhuabcfghh
+// Ouput 1: a2b3h3u1c1f1g1
 
 //Solution Approach :-
-Maintain frequency array of characters. and also maintain visited array so that we can maintain which characters we have already written their frequency.
+//Maintain frequency array of characters. and also maintain visited array so that we can maintain which characters we have already written their frequency.
 
 
 // First Method :-
@@ -32,16 +30,17 @@ string Solution::solve(string A) {
 string Solution::solve(string A) {
     string s;
     int arr[27]={0};
-    for(auto i: A)  arr[i-'a']++;
+    for(auto i: A){
+        arr[i-'a']++;
+    }
     for(auto i: A) {
-        if(arr[i-'a']>0) {
+        if(arr[i-'a']>0){
             s+=i;
             s+=char((arr[i-'a'])+'0');
             arr[i-'a']=0;
         }
     }
     return s;
-    
 }
 
 

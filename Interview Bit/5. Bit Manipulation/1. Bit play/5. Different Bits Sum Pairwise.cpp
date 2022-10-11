@@ -12,18 +12,18 @@
 // 1 + 2 + 0 = 8
 
 //Hint :-
-Assume that all values in input have only 1 bit i.e. Ai = 0 or 1.
-How would you solve now?
-Can you combine this logic if we have multiple bits?
+// Assume that all values in input have only 1 bit i.e. Ai = 0 or 1.
+// How would you solve now?
+// Can you combine this logic if we have multiple bits?
 
 //Solution Approach :- 
-Assume that all values in input have only 1 bit i.e. Ai = 0 or 1.
-Lets say A = count of elements which are 0
-and B = count of elements which are 1
-In this case our answer is just 2AB, since each such pair contributes 1 to answer.
-Can you combine this logic if we have multiple bits?
-Note that all bits are independent in counting, since we are counting number of bits which are different in each pair.
-So, we just do the same process for all different bits. Since Ai is an integer, we just have to do this for 31 different bits, so our solution is O(31*N).
+// Assume that all values in input have only 1 bit i.e. Ai = 0 or 1.
+// Lets say A = count of elements which are 0
+// and B = count of elements which are 1
+// In this case our answer is just 2AB, since each such pair contributes 1 to answer.
+// Can you combine this logic if we have multiple bits?
+// Note that all bits are independent in counting, since we are counting number of bits which are different in each pair.
+// So, we just do the same process for all different bits. Since Ai is an integer, we just have to do this for 31 different bits, so our solution is O(31*N).
 
 
 //First Solution :-

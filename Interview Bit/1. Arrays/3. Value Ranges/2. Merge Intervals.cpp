@@ -1,6 +1,9 @@
 // Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
 // You may assume that the intervals were initially sorted according to their start times.
 
+// Example 1: Given intervals [1,3],[6,9] insert and merge [2,5] would result in [1,5],[6,9].
+// Example 2: Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] would result in [1,2],[3,10],[12,16]. This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
+// Make sure the returned intervals are also sorted.
 
 //Hint 1
 This problem has a lot of corner cases which need to be handled correctly.
@@ -16,22 +19,20 @@ Note that if max(a,c) > min(b,d), then the intervals do not overlap. Otherwise, 
 
 
 //Solution Approach
-Have you covered the following corner cases :
+// Have you covered the following corner cases :
+// 1 Size of interval array as 0.
 
-1 Size of interval array as 0.
+// 2 newInterval being an interval preceding all intervals in the array.
+//     Given interval (3,6),(8,10), insert and merge (1,2)
 
-2 newInterval being an interval preceding all intervals in the array.
+// 3 newInterval being an interval succeeding all intervals in the array.
+//     Given interval (1,2), (3,6), insert and merge (8,10)
 
-    Given interval (3,6),(8,10), insert and merge (1,2)
-3 newInterval being an interval succeeding all intervals in the array.
+// 4 newInterval not overlapping with any interval and falling in between 2 intervals in the array.
+//     Given interval (1,2), (8,10) insert and merge (3,6) 
 
-    Given interval (1,2), (3,6), insert and merge (8,10)
-4 newInterval not overlapping with any interval and falling in between 2 intervals in the array.
-
-    Given interval (1,2), (8,10) insert and merge (3,6) 
-5 newInterval covering all given intervals.
-
-    Given interval (3, 5), (7, 9) insert and merge (1, 10)
+// 5 newInterval covering all given intervals.
+//     Given interval (3, 5), (7, 9) insert and merge (1, 10)
 
 
 //First Solution :-
@@ -44,9 +45,10 @@ Have you covered the following corner cases :
  *     Interval(int s, int e) : start(s), end(e) {}
  * };
  */
- bool mycomp(Interval a,Interval b){
-     return a.start<b.start;
- }
+
+bool mycomp(Interval a,Interval b){
+    return a.start<b.start;
+}
 
 vector<Interval> Solution::insert(vector<Interval> &A, Interval newInterval) {
     A.push_back(newInterval);
@@ -55,10 +57,12 @@ vector<Interval> Solution::insert(vector<Interval> &A, Interval newInterval) {
     int n=A.size();
     res.push_back(A[0]);
     for(int i=1;i<n;i++){
-        if(A[i].start<=res[res.size()-1].end)
-         res[res.size()-1].end=max(res[res.size()-1].end,A[i].end);
-        else
-         res.push_back(A[i]);
+        if(A[i].start<=res[res.size()-1].end){
+            res[res.size()-1].end=max(res[res.size()-1].end,A[i].end);
+        }
+        else{
+            res.push_back(A[i]);
+        }
     }
     return res;
 }
@@ -116,14 +120,16 @@ vector<Interval> Solution::insert(vector<Interval> &A, Interval newarr) {
  *     Interval(int s, int e) : start(s), end(e) {}
  * };
  */
- bool cmp(Interval a, Interval b)
- {
-     return a.start<=b.start;
- }
+bool cmp(Interval a, Interval b)
+{
+    return a.start<=b.start;
+}
+
 vector<Interval> Solution::insert(vector<Interval> &A, Interval B) {
     A.push_back(B);
-     sort(A.begin(),A.end(),cmp);
+    sort(A.begin(),A.end(),cmp);
     int j=0,i=0,k;
+    
     for(i=0;i<A.size();i++)
     {
         int mn = A[i].start;
@@ -156,61 +162,40 @@ vector<Interval> Solution::insert(vector<Interval> &A, Interval B) {
 
 
 
-
-
-
-
 // Another solution :- using stack
-// A C++ program for merging overlapping intervals
 #include<bits/stdc++.h>
 using namespace std;
 
-// An interval has start time and end time
-struct Interval
-{
+struct Interval{          // An interval has start time and end time
     int start, end;
 };
 
-// Compares two intervals according to their starting time.
-// This is needed for sorting the intervals using library
-// function std::sort(). See http://goo.gl/iGspV
-bool compareInterval(Interval i1, Interval i2)
-{
+
+bool compareInterval(Interval i1, Interval i2){
     return (i1.start < i2.start);
 }
 
-// The main function that takes a set of intervals, merges
-// overlapping intervals and prints the result
-void mergeIntervals(Interval arr[], int n)
-{
-    // Test if the given set has at least one interval
-    if (n <= 0)
+
+void mergeIntervals(Interval arr[], int n){
+    if (n <= 0){
         return;
+    }
 
-    // Create an empty stack of intervals
     stack<Interval> s;
-
-    // sort the intervals in increasing order of start time
     sort(arr, arr+n, compareInterval);
 
-    // push the first interval to stack
     s.push(arr[0]);
 
-    // Start from the next interval and merge if necessary
-    for (int i = 1 ; i < n; i++)
-    {
-        // get interval from stack top
+    for (int i = 1 ; i < n; i++){
         Interval top = s.top();
 
-        // if current interval is not overlapping with stack top,
-        // push it to the stack
-        if (top.end < arr[i].start)
+        // if current interval is not overlapping with stack top, push it to the stack
+        if (top.end < arr[i].start){
             s.push(arr[i]);
+        }
 
-        // Otherwise update the ending time of top if ending of current
-        // interval is more
-        else if (top.end < arr[i].end)
-        {
+        // Otherwise update the ending time of top if ending of current interval is more
+        else if (top.end < arr[i].end){
             top.end = arr[i].end;
             s.pop();
             s.push(top);
@@ -219,8 +204,7 @@ void mergeIntervals(Interval arr[], int n)
 
     // Print contents of stack
     cout << "\n The Merged Intervals are: ";
-    while (!s.empty())
-    {
+    while (!s.empty()){
         Interval t = s.top();
         cout << "[" << t.start << "," << t.end << "] ";
         s.pop();
@@ -228,9 +212,7 @@ void mergeIntervals(Interval arr[], int n)
     return;
 }
 
-// Driver program
-int main()
-{
+int main(){
     Interval arr[] =  { {6,8}, {1,9}, {2,4}, {4,7} };
     int n = sizeof(arr)/sizeof(arr[0]);
     mergeIntervals(arr, n);

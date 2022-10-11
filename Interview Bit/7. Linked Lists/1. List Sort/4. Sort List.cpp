@@ -1,18 +1,18 @@
-Sort a linked list in O(n log n) time using constant space complexity.
+// Sort a linked list in O(n log n) time using constant space complexity.
 
-Example :
-Input : 1 -> 5 -> 4 -> 3
-Returned list : 1 -> 3 -> 4 -> 5
+// Example :
+// Input : 1 -> 5 -> 4 -> 3
+// Returned list : 1 -> 3 -> 4 -> 5
 
 
 //Hint :-
-Merge sort is usually quicker and easier to implement when it comes to implementing sorting in O(nlogn).
-Think recursively. You will end up breaking the problems into small pieces.
+// Merge sort is usually quicker and easier to implement when it comes to implementing sorting in O(nlogn).
+// Think recursively. You will end up breaking the problems into small pieces.
 
 
 //Solution Approach :-
-Can implement either merge sort or qsort.
-Lets look at merge sort. Traverse the linked list to find the mid point of the list. Now sort the first half and second half separatly by calling the function on them. Then merge the 2 lists ( Note that we already have solved a problem to merge 2 lists ).
+// Can implement either merge sort or qsort.
+// Lets look at merge sort. Traverse the linked list to find the mid point of the list. Now sort the first half and second half separatly by calling the function on them. Then merge the 2 lists ( Note that we already have solved a problem to merge 2 lists ).
 
 
 // First Method :-  //Merge Sort

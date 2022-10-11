@@ -36,6 +36,69 @@ string Solution::countAndSay(int A) {
 
 
 //Second Method :-
+string cntsay(string str){
+    int n=str.size();
+    int cnt=1;
+    string res="";
+    for(int i=0;i<n-1;i++){
+        if(str[i]==str[i+1])
+            cnt++;
+        else{
+            res+=to_string(cnt);
+            res+=str[i];
+            cnt=1;
+        }
+    }
+    res+=to_string(cnt);
+    res+=str[n-1];
+
+    return res;
+}
+
+string Solution::countAndSay(int n) {
+    if(n==1){
+        return “1”;
+    }
+    return cntsay(countAndSay(n-1));
+}
+
+
+
+//Third Method :-
+string Solution::countAndSay(int A) {
+    string s[A+2];
+    s[1] = "1";
+    s[2] = "11";
+    for(int i = 3; i <= A; i++) {
+        s[i] = "";
+        for(int j = 0; j < s[i-1].length(); j++) {
+            char x = s[i-1][j];
+            int count = 1;
+            while((j+1) < s[i-1].length() && s[i-1][j+1] == x) {
+                count++;
+                j++;
+            }
+            string sCount = "";
+            while(count > 0) {
+                int y = count % 10;
+                count = count / 10;
+                char c = y + '0';
+                sCount.push_back(c);
+            }
+            string iCount = "";
+            for(int j = sCount.length() - 1; j >= 0; j--) {
+                iCount += sCount[j];
+            }
+            s[i] += iCount;
+            s[i] += x;
+        }
+    }
+    return s[A];
+}
+
+
+
+//Fourth Method :-
 string Solution::countAndSay(int n) {
     string a="1",b="1",c="";
     n--;
@@ -75,68 +138,4 @@ string Solution::countAndSay(int n) {
         a=c;
     }
     return a;
-}
-
-
-
-//Third Method :-
-string Solution::countAndSay(int A) {
-    string s[A+2];
-    s[1] = "1";
-    s[2] = "11";
-    for(int i = 3; i <= A; i++) {
-        s[i] = "";
-        for(int j = 0; j < s[i-1].length(); j++) {
-            char x = s[i-1][j];
-            int count = 1;
-            while((j+1) < s[i-1].length() && s[i-1][j+1] == x) {
-                count++;
-                j++;
-            }
-            string sCount = "";
-            while(count > 0) {
-                int y = count % 10;
-                count = count / 10;
-                char c = y + '0';
-                sCount.push_back(c);
-            }
-            string iCount = "";
-            for(int j = sCount.length() - 1; j >= 0; j--) {
-                iCount += sCount[j];
-            }
-            s[i] += iCount;
-            s[i] += x;
-        }
-    }
-    return s[A];
-}
-
-
-
-
-
-//Fourth Method :-
-string cntsay(string str){
-	int n=str.size();
-	int cnt=1;
-	string res="";
-	for(int i=0;i<n-1;i++){
-		if(str[i]==str[i+1])
-			cnt++;
-		else{
-			res+=to_string(cnt);
-			res+=str[i];
-			cnt=1;
-		}
-	}
-	res+=to_string(cnt);
-	res+=str[n-1];
-
-	return res;
-}
-
-string Solution::countAndSay(int n) {
-	if(n==1)
-		return “1”;
-	return cntsay(countAndSay(n-1));
 }

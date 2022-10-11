@@ -6,11 +6,11 @@
 //  6
 
 //Hint :-
-Take a close look at any particular bin. How high can this hold water? If you can compute the answer of the above question for every bin you are done.
-Every bin will store water which will depend on some prefix and suffix quantity. Can you figure it out now?
+// Take a close look at any particular bin. How high can this hold water? If you can compute the answer of the above question for every bin you are done.
+// Every bin will store water which will depend on some prefix and suffix quantity. Can you figure it out now?
 
 //Solution Approach :-
-instead of calculating area by height*width, we can think it in a cumulative way. In other words, sum water amount of each bin(width=1). Search from left to right and maintain a max height of left and right separately, which is like a one-side wall of partial container. Fix the higher one and flow water from the lower part. For example, if current height of left is lower, we fill water in the left bin. Until left meets right, we filled the whole container.
+//instead of calculating area by height*width, we can think it in a cumulative way. In other words, sum water amount of each bin(width=1). Search from left to right and maintain a max height of left and right separately, which is like a one-side wall of partial container. Fix the higher one and flow water from the lower part. For example, if current height of left is lower, we fill water in the left bin. Until left meets right, we filled the whole container.
 
 //First Solution :-
 int Solution::trap(const vector<int> &A) {

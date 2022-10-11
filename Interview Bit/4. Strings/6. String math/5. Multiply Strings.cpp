@@ -8,12 +8,12 @@
 
 
 //Hint :-
-If length of input strings are N and M, then the expected comlexity is O(N*M) here.
-You need to code the same process of multiplication which you follow on pen-paper.
+// If length of input strings are N and M, then the expected comlexity is O(N*M) here.
+// You need to code the same process of multiplication which you follow on pen-paper.
 
 //Solution Approach :-
-Would it be easier if you reversed the number for multiplication to calculate the reverse of the answer and then reverse it back to get the actual answer?
-It is mostly simulation of the multiplication process where we take one number digit by digit and keep multiplying the digit with the other number and maintaining the sum in another array.
+// Would it be easier if you reversed the number for multiplication to calculate the reverse of the answer and then reverse it back to get the actual answer?
+// It is mostly simulation of the multiplication process where we take one number digit by digit and keep multiplying the digit with the other number and maintaining the sum in another array.
 
 //First Solution :-
 string Solution::multiply(string A, string B) {
@@ -30,8 +30,9 @@ string Solution::multiply(string A, string B) {
     }
 
     for(int i = 0; i < m + n; i++){
-        if(ans[i] !='0')
+        if(ans[i] !='0'){
             return ans.substr(i);
+        }
     }
     return "0";
 }
@@ -39,11 +40,11 @@ string Solution::multiply(string A, string B) {
 
 //Second Solution :-
 string Solution::multiply(string num1, string num2) {
-    // handle edge-case where the product is 0
-    if (num1 == "0" || num2 == "0") return "0";
+    if(num1 == "0" || num2 == "0"){         // handle edge-case where the product is 0       
+        return "0";     
+    }
     
-    // num1.size() + num2.size() == max no. of digits
-    vector<int> num(num1.size() + num2.size(), 0);
+    vector<int> num(num1.size() + num2.size(), 0);       // num1.size() + num2.size() == max no. of digits
     
     // build the number by multiplying one digit at the time
     for (int i = num1.size() - 1; i >= 0; --i) {

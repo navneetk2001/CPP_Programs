@@ -3,12 +3,19 @@
 // Serialization: Scan each element in a string, calculate its length and append it with a string and a element separator or deliminator (the deliminator is ~). We append the length of the string so that we know the length of each element.
 // For example, for a string 'interviewbit', its serialized version would be 'interviewbit12~'.
 
+// Input 1: A = 'scaler6~academy7~'
+// Output 1: ['scaler', 'academy']
+// Explanation 1: Length of 'scaler' is 6 and academy is 7. So, the resulting string is scaler6~academy7~. We hve to reverse the process.
+
+// Input 2: A = 'interviewbit12~'
+// Output 2: ['interviewbit']
+// Explanation 2: Explained in the description above.
 
 //Solution Approach
-We have to first find out at which position our individual string is ending.
-Since, our string only consists of lower case english alphabets and out delimiter is `~`.
-We can easily find out individual strings.
-We just have to take out the substrings and insert it in a auxillary array which we will have to return.
+// We have to first find out at which position our individual string is ending.
+// Since, our string only consists of lower case english alphabets and out delimiter is `~`.
+// We can easily find out individual strings.
+// We just have to take out the substrings and insert it in a auxillary array which we will have to return.
 
 
 // First Method :-
@@ -34,18 +41,15 @@ vector<string> Solution::deserialize(string A) {
 
 
 //Second Method :-
-Editorial
-Fastest
-Lightweight
 vector<string> Solution::deserialize(string A) {
     string t = "";
     vector<string> ans;
 
-    for( char c : A) {
+    for(char c : A) {
         if (c <= 'z' && c >= 'a') {
             t += c;
         }
-        if( c == '~') {
+        if(c == '~') {
             ans.push_back(t);
             t = "";
         }

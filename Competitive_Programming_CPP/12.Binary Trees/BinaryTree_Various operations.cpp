@@ -183,7 +183,5 @@ int main()
     cout<<"Node "<<node<<" is present at level :"<<Level;
     cout<<endl;
 
-
-
     delete root;
 }

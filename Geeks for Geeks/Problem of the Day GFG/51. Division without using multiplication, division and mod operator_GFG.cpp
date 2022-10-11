@@ -29,9 +29,8 @@
 
 
 //Solution using bit Manipulation for GFG :-
-class Solution
-{
-    public:
+class Solution{
+public:
     long long divide(long long dividend, long long divisor) 
     {
         int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
@@ -82,7 +81,7 @@ int Solution::divide(int A, int B) {
 
 //Second Solution :- Repetated division  :- T.C :- O(N)
 int Solution::divide(int A, int B) {
-    if(A==INT_MIN&&B==-1)
+    if(A==INT_MIN && B==-1)
         return INT_MAX;
         
     long long int a=A,b=B;
@@ -115,6 +114,30 @@ int Solution::divide(int A, int B) {
 }
 
 
+
+//Fourth Solution :- LeetCode Accepted Solution 
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if (dividend == INT_MIN && divisor == -1) {
+            return INT_MAX;
+        }
+
+        long dvd = labs(dividend), dvs = labs(divisor), ans = 0;
+        int sign = dividend > 0 ^ divisor > 0 ? -1 : 1;
+        
+        while (dvd >= dvs) {
+            long temp = dvs, m = 1;
+            while(temp << 1 <= dvd) {
+                temp <<= 1;
+                m <<= 1;
+            }
+            dvd -= temp;
+            ans += m;
+        }
+        return sign * ans;
+    }
+};
 
 
 

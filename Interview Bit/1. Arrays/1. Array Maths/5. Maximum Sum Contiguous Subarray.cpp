@@ -9,8 +9,9 @@ int Solution::maxSubArray(const vector<int> &A) {
     for(int i=0;i<n;i++){
         currSum+=A[i];
         maxSum =max(maxSum,currSum);
-        if(currSum<0)
+        if(currSum<0){
            currSum=0;
+        }
     }
     return maxSum;
 }

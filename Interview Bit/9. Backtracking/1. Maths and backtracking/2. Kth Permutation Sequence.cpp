@@ -18,33 +18,35 @@
 // n is reasonable enough to make sure the answer does not bloat up a lot.
 
 //Hint :-
-Note: Generating all permutation wont help here.
-What you can do is try out elements which can you keep at any position. If the permutation resulting from keeping this element does not becomes >= k you keep incrementing the element to be put.
-Can you see now how recursion and maths can help us here now?
+// Note: Generating all permutation wont help here.
+// What you can do is try out elements which can you keep at any position. If the permutation resulting from keeping this element does not becomes >= k you keep incrementing the element to be put.
+// Can you see now how recursion and maths can help us here now?
 
 //Solution Approach :- 
-This involves a little bit of maths and recursion for simplicity.
-Number of permutation possible using n distinct numbers = n!
-Lets first make k 0 based.
-Let us first look at what our first number should be.
-Number of sequences possible with 1 in first position : (n-1)!
-Number of sequences possible with 2 in first position : (n-1)!
-Number of sequences possible with 3 in first position : (n-1)!
-Hence, the number at our first position should be k / (n-1)! + 1 th integer.
-Can we reduce the k and modify the set we pick our numbers from ( initially 1 2 3 … n ) to call the function for second position onwards ?
+// This involves a little bit of maths and recursion for simplicity.
+// Number of permutation possible using n distinct numbers = n!
+// Lets first make k 0 based.
+// Let us first look at what our first number should be.
+// Number of sequences possible with 1 in first position : (n-1)!
+// Number of sequences possible with 2 in first position : (n-1)!
+// Number of sequences possible with 3 in first position : (n-1)!
+// Hence, the number at our first position should be k / (n-1)! + 1 th integer.
+// Can we reduce the k and modify the set we pick our numbers from ( initially 1 2 3 … n ) to call the function for second position onwards ?
 
 
 //Best Solution : For Interviewbit
 int fact(int n){
-    if(n>12)
+    if(n>12){
         return INT_MAX;
+    }
     return (n==1 || n==0) ? 1: n * fact(n - 1);
 }
 
 string Solution::getPermutation(int N, int B) {
     vector<int> C;
-    for(int i=1;i<=N;i++)
+    for(int i=1;i<=N;i++){
         C.push_back(i);
+    }
     
     string ans="";
     int block;
@@ -65,19 +67,19 @@ string Solution::getPermutation(int N, int B) {
 //First Solution :-
 // here is the optimal solution
 string Solution::getPermutation(int n, int k) {
-    if(n>12) 
+    if(n>12) {
         return to_string(INT_MAX);
+    }
     vector<int> nums;
     int fact = 1;    // taking factorial that is all the number of factorial;
     
-    // also we take factorial till n-1 only because we have to calculate only on the 
-    // specific permutions after taking the first element out that is k / fact on line 21
+    // also we take factorial till n-1 only because we have to calculate only on the specific permutions after taking the first element out that is k / fact on line 21
     for(int i = 1; i < n; i++) {
         nums.push_back(i);   // storing number in nums vec 
         fact *= i;
     }
     nums.push_back(n);   // storing last number also in nums vec 
-    k--;    // reducing k by 1 because of 0 based indexing
+    k--;                 // reducing k by 1 because of 0 based indexing
     string ans = "";
     
     while(true) {
@@ -104,7 +106,8 @@ class Solution {
 public:
 	string getPermutation(int n, int k) {
 		string s;
-		for(int i=1;i<=n;i++) s.push_back(i+'0');;
+		for(int i=1;i<=n;i++) 
+            s.push_back(i+'0');
 		while(k-->1){
 			next_permutation(s.begin(),s.end());
 		}

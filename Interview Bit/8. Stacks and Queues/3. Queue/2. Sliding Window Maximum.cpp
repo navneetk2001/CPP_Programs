@@ -22,23 +22,23 @@
 
 
 //Hint :-
-Approach 1 :
-The obvious brute force solution with run time complexity of O(nw) is definitely not efficient enough. Every time the window is moved, you have to search for a total of w elements in the window.
+// Approach 1 :
+// The obvious brute force solution with run time complexity of O(nw) is definitely not efficient enough. Every time the window is moved, you have to search for a total of w elements in the window.
 
-Approach 2:
-A heap data structure quickly comes to mind. We could boost the run time to approximately O(n lg w) (Note that I said approximately because the size of the heap changes constantly and averages about w). Insert operation takes O(lg w) time, where w is the size of the heap. However, getting the maximum value is cheap, it merely takes constant time as the maximum value is always kept in the root (head) of the heap.
-As the window slides to the right, some elements in the heap might not be valid anymore (range is outside of the current window). How should you remove them? You would need to be somewhat careful here. Since you only remove elements that are out of the window’s range, you would need to keep track of the elements’ indices too.
-TIme complexity : O ( n log n ). Not good enough.
+// Approach 2:
+// A heap data structure quickly comes to mind. We could boost the run time to approximately O(n lg w) (Note that I said approximately because the size of the heap changes constantly and averages about w). Insert operation takes O(lg w) time, where w is the size of the heap. However, getting the maximum value is cheap, it merely takes constant time as the maximum value is always kept in the root (head) of the heap.
+// As the window slides to the right, some elements in the heap might not be valid anymore (range is outside of the current window). How should you remove them? You would need to be somewhat careful here. Since you only remove elements that are out of the window’s range, you would need to keep track of the elements’ indices too.
+// TIme complexity : O ( n log n ). Not good enough.
 
-Approach 3 :
-A double-ended queue should do the trick here.
-The double-ended queue is the perfect data structure for this problem. It supports insertion/deletion from the front and back. The trick is to find a way such that the largest element in the window would always appear in the front of the queue. How would you maintain this requirement as you push and pop elements in and out of the queue?
+// Approach 3 :
+// A double-ended queue should do the trick here.
+// The double-ended queue is the perfect data structure for this problem. It supports insertion/deletion from the front and back. The trick is to find a way such that the largest element in the window would always appear in the front of the queue. How would you maintain this requirement as you push and pop elements in and out of the queue?
 
 
 //Solution Approach :-
-The double-ended queue is the perfect data structure for this problem. It supports insertion/deletion from the front and back. The trick is to find a way such that the largest element in the window would always appear in the front of the queue. How would you maintain this requirement as you push and pop elements in and out of the queue?
-You might notice that there are some redundant elements in the queue that we shouldn’t even consider about. For example, if the current queue has the elements: [10 5 3], and a new element in the window has the element 11. Now, we could have emptied the queue without considering elements 10, 5, and 3, and insert only element 11 into the queue.
-A natural way most people would think is to try to maintain the queue size the same as the window’s size. Try to break away from this thought and try to think outside of the box. Removing redundant elements and storing only elements that need to be considered in the queue is the key to achieve the efficient O(n) solution.
+// The double-ended queue is the perfect data structure for this problem. It supports insertion/deletion from the front and back. The trick is to find a way such that the largest element in the window would always appear in the front of the queue. How would you maintain this requirement as you push and pop elements in and out of the queue?
+// You might notice that there are some redundant elements in the queue that we shouldn’t even consider about. For example, if the current queue has the elements: [10 5 3], and a new element in the window has the element 11. Now, we could have emptied the queue without considering elements 10, 5, and 3, and insert only element 11 into the queue.
+// A natural way most people would think is to try to maintain the queue size the same as the window’s size. Try to break away from this thought and try to think outside of the box. Removing redundant elements and storing only elements that need to be considered in the queue is the key to achieve the efficient O(n) solution.
 
 
 //First Solution :- //using deque ( or diubly linked list)
@@ -48,7 +48,7 @@ vector<int> Solution::slidingMaximum(const vector<int> &A, int B) {
     int i=0;
     int j=0;
     
-    if (B>A.size()) // edge case
+    if(B>A.size()) // edge case
     {
         ans.push_back(*max_element(l.begin(),l.end()));
         return ans;

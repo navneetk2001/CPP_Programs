@@ -1,18 +1,24 @@
 // Given an sorted array A of size N. Find number of elements which are less than or equal to B.
 // NOTE: Expected Time Complexity O(log N)
 
+// Input 1:
+//  A = [1, 3, 4, 4, 6]
+//  B = 4
+// Output 1: 4
+// Explanation 1: Elements (1, 3, 4, 4) are less than or equal to 4.
+
+// Input 2:
+//  A = [1, 2, 5, 5]
+//  B = 3
+// Output 2: 2
+// Explanation 2: Elements (1, 2) are less than or equal to 3.
 
 //Solution Approach
-Naive Approach:
+// Naive Approach: Search whole array linearly and count elements which are less then or equal to B.
 
-Search whole array linearly and count elements which are less then or equal to B.
-
-Efficient approach: As the whole array is sorted we can use binary search to find result.
-
-Case 1: When B is present in array, the last position of B is the result.
-Case 2: When B is not present in array, we ignore right half if B is greater than mid. If B is smaller than mid, we ignore left half. We always end up with case where B is present before middle element.
-
-
+// Efficient approach: As the whole array is sorted we can use binary search to find result.
+// Case 1: When B is present in array, the last position of B is the result.
+// Case 2: When B is not present in array, we ignore right half if B is greater than mid. If B is smaller than mid, we ignore left half. We always end up with case where B is present before middle element.
 
 
 
@@ -26,9 +32,9 @@ int Solution::solve(vector<int> &A, int B) {
             count=mid+1;
             low=mid+1;
         }
-        if(A[mid]>B) 
+        if(A[mid]>B) {
             high=mid-1;
-
+        }
     }
     return count;
 }
@@ -46,12 +52,18 @@ int Solution::solve(vector<int> &a, int b){
     int l=0,h=a.size(),m,x=-1,y=-1;
     while(l<=h){
         m=l+(h-l)/2;
-        if(a[m]<=b){y=m; l=m+1;}
-        else h=m-1;
+        if(a[m]<=b){
+            y=m; 
+            l=m+1;
+        }
+        else {
+            h=m-1;
+        }
     }
-    if(y!=-1) return y+1;
+    if(y!=-1) {
+        return y+1;
+    }
     else return 0;
-
 }
 
 // Fourth Method :- Recursion

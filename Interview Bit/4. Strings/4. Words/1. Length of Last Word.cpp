@@ -8,10 +8,10 @@
 
 
 //Solution Approach
-As said before, this problem does not allow using library functions.
-What if you maintained the length of the current word?
-You reset the length of the word when the next word begins (When does a new word begin?)
-Return the last length you have.
+// As said before, this problem does not allow using library functions.
+// What if you maintained the length of the current word?
+// You reset the length of the word when the next word begins (When does a new word begin?)
+// Return the last length you have.
 
 
 // First Method :-
@@ -24,8 +24,9 @@ int Solution::lengthOfLastWord(const string A) {
     while(A[i]==' ') {
         i--;           //to get first white space
     }
-    for(;i>=0 && A[i]!=' ';i--) 
+    for(;i>=0 && A[i]!=' ';i--) {
         count++;
+    }
 
     return count;
 }
@@ -36,11 +37,11 @@ int Solution::lengthOfLastWord(const string A) {
     int cnt=0;
     int i=A.size()-1;
 
-    while(A[i]==' ' && i>=0)
+    while(A[i]==' ' && i>=0){
         i--;
+    }
 
-    while(i>=0 && A[i]!=' ')
-    {
+    while(i>=0 && A[i]!=' '){
         cnt++;
         i--;
     }

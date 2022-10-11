@@ -1,37 +1,103 @@
-Reverse a linked list from position m to n. Do it in-place and in one-pass.
-For example:
-Given 1->2->3->4->5->NULL, m = 2 and n = 4,
-return 1->4->3->2->5->NULL.
+// Reverse a linked list from position m to n. Do it in-place and in one-pass.
+// For example:
+// Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+// return 1->4->3->2->5->NULL.
 
-Note:
-Given m, n satisfy the following condition:
-1 ≤ m ≤ n ≤ length of list.
-Note 2:
-Usually the version often seen in the interviews is reversing the whole linked list which is obviously an easier version of this question.
+// Note:
+// Given m, n satisfy the following condition:
+// 1 ≤ m ≤ n ≤ length of list.
+// Note 2:
+// Usually the version often seen in the interviews is reversing the whole linked list which is obviously an easier version of this question.
 
-//Hint :-
-Lets first look at the problem of reversing the linked list.
-a -> b -> c should become
-a <- b <- c
-Obviously at every instant, you need to know about the previous of the node, so that you can link it to the next of the node.
-Can you think along the lines of maintaining a previousNode, curNode and nextNode ?
-Now once you know how to reverse a linked List, how can you apply it to the current problem ?
+// //Hint :-
+// Lets first look at the problem of reversing the linked list.
+// a -> b -> c should become
+// a <- b <- c
+// Obviously at every instant, you need to know about the previous of the node, so that you can link it to the next of the node.
+// Can you think along the lines of maintaining a previousNode, curNode and nextNode ?
+// Now once you know how to reverse a linked List, how can you apply it to the current problem ?
 
 
 //Solution Approach :-
-If you are still stuck at reversing the full linked list problem,
-then would maintaining curNode, nextNode and a tmpNode help ?
+// If you are still stuck at reversing the full linked list problem,
+// then would maintaining curNode, nextNode and a tmpNode help ?
 
-Maybe at every step, you do something like this :
+// Maybe at every step, you do something like this :
 
-    tmp = nextNode->next;
-            nextNode->next = cur;
-            cur = nextNode;
-            nextNode = tmp;
-Now, lets say you did solve the problem of reversing the linked list and are stuck at applying it to current problem.
-What if your function reverses the linked list and returns the endNode of the list.
-You can simply do
-prevNodeOfFirstNode->next = everseLinkedList(curNode, n - m + 1);
+//     tmp = nextNode->next;
+//             nextNode->next = cur;
+//             cur = nextNode;
+//             nextNode = tmp;
+// Now, lets say you did solve the problem of reversing the linked list and are stuck at applying it to current problem.
+// What if your function reverses the linked list and returns the endNode of the list.
+// You can simply do
+// prevNodeOfFirstNode->next = everseLinkedList(curNode, n - m + 1);
+
+
+
+
+
+
+
+//Fourth Solution :- GFG
+class Solution{
+public:
+    struct Node* reverse(struct Node* head){   //function to reverse a linked list
+        struct Node* prev = NULL;
+        struct Node* curr = head;
+    
+        while(curr){
+            struct Node* next = curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+
+    Node* reverseBetween(Node* head, int m, int n){
+        if(m==n){         //Base Case
+            return head;
+        }
+        
+        //we will take 4 variables :- rev, rev_prev, rev_end, rev_end_next so that we can 
+        //take out the sublist which we have to reverse and then again join them a/c to question
+        Node* rev = NULL, *rev_prev=NULL;
+        Node* revEnd = NULL, *revEnd_next=NULL;
+        
+        int i=1;
+        Node* curr=head;
+        while(curr&&i<=n){
+            if(i<m){               //keep track of revs_prev so that we can later join this after reversing sublist
+                rev_prev=curr;
+            }
+            if(i==m){
+                rev=curr;       //keep track of revs pointer which is the starting node/head of the sublist to be reversed
+            }
+            if(i==n){
+                revEnd=curr;   //keep track of end of sublist
+                revEnd_next=curr->next;    //keep track of end->next so that we can finally join the sublist with remaining list
+            }
+            curr=curr->next;
+            i++;
+        }
+        
+        revEnd->next=NULL;   //taking sublist out of whole list
+        revEnd=reverse(rev);  //reversing the sublist
+        
+        if(rev_prev){    //if starting position was not head
+            rev_prev->next=revEnd;
+        }
+        else{        //if starting position was head
+            head=revEnd;
+        }
+        
+        rev->next=revEnd_next;    //finally connecting last of the sublist
+        return head;
+    }
+};
+
+
 
 
 // First Method :-
@@ -63,6 +129,10 @@ ListNode* Solution::reverseBetween(ListNode* A, int B, int C) {
     return dummy->next;
 }
 
+
+
+
+
 //Second Method :-
 ListNode* Solution::reverseBetween(ListNode* A, int B, int C) {
     if(B != 1){ // if B is not the first element 
@@ -83,6 +153,10 @@ ListNode* Solution::reverseBetween(ListNode* A, int B, int C) {
         return prev;// return the new start
     }
 }
+
+
+
+
 
 //Third Method :-
 ListNode* Solution::reverseBetween(ListNode* A, int B, int C) {
@@ -124,7 +198,6 @@ ListNode* Solution::reverseBetween(ListNode* A, int B, int C) {
     return temp->next;
     
 }
-
 
 
 

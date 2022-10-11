@@ -59,7 +59,7 @@ public:
 
 
 //Second Solution :- Using Recursion
-Recursively connect the left and right subtrees.
+//Recursively connect the left and right subtrees.
 class Solution {
 public:
     Node* connect(Node* root) 

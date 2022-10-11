@@ -16,7 +16,7 @@
 // If you do, we will disqualify your submission retroactively and give you penalty points.
 
 //Solution Approach :- 
-In every recursion run, you either include the element in the combination or you don’t. To account for multiple occurrences of an element, make sure you call the next function without incrementing the current index.
+//In every recursion run, you either include the element in the combination or you don’t. To account for multiple occurrences of an element, make sure you call the next function without incrementing the current index.
 
 //First Solution :-
 void solve(int i, vector<int>& arr, vector<int>& temp, int target, set<vector<int> > &sets){
@@ -44,8 +44,9 @@ vector<vector<int> > Solution::combinationSum(vector<int> &A, int target) {
     sort(A.begin(), A.end());
     solve(0, A, temp, target,sets);
 
-    for(auto st: sets)
+    for(auto st: sets){
         ans.push_back(st);
+    }
 
     sort(ans.begin(), ans.end());
     return ans; 

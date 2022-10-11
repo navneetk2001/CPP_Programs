@@ -2,40 +2,46 @@
 // Find the median of the two sorted arrays ( The median of the array formed by merging both the arrays ).
 // The overall run time complexity should be O(log (m+n)).
 
+// Sample Input:
+// A : [1 4 5]
+// B : [2 3]
+// Sample Output: 3
+
+// NOTE: IF the number of elements in the merged array is even, then the median is the average of n / 2 th and n/2 + 1th element. 
+// For example, if the array is [1 2 3 4], the median is (2 + 3) / 2.0 = 2.5
 
 //Hint 1
-The expected time complexity gives away binary search in this case.
-We are going to do binary search for the answer in this case.
+// The expected time complexity gives away binary search in this case.
+// We are going to do binary search for the answer in this case.
 
-Given a sorted array A of length m, we can split it into two parts:
-{ A[0], A[1], … , A[i - 1] }	{ A[i], A[i + 1], … , A[m - 1] }
-All elements in right part are greater than elements in the left part.
+// Given a sorted array A of length m, we can split it into two parts:
+// { A[0], A[1], … , A[i - 1] }	{ A[i], A[i + 1], … , A[m - 1] }
+// All elements in right part are greater than elements in the left part.
 
-The left part has i elements, and right part has m - i elements.
-There are m + 1 kinds of splits.
-(i = 0 ~ m)
-When i = 0, the left part has “0” elements, the right part has “m” elements.
-When i = m, the left part has “m” elements, right part has “0” elements.
+// The left part has i elements, and right part has m - i elements.
+// There are m + 1 kinds of splits.
+// (i = 0 ~ m)
+// When i = 0, the left part has “0” elements, the right part has “m” elements.
+// When i = m, the left part has “m” elements, right part has “0” elements.
 
-For the array B, we can split it in the same way:
-{ B[0], B[1], … , B[j - 1] }	{ B[j], B[j + 1], … , B[n - 1] }
-The left part has “j” elements, and right part has “n - j” elements.
+// For the array B, we can split it in the same way:
+// { B[0], B[1], … , B[j - 1] }	{ B[j], B[j + 1], … , B[n - 1] }
+// The left part has “j” elements, and right part has “n - j” elements.
 
-Put A’s left part and B’s left part into one set. (Let’s name this set “LeftPart”)
-Put A’s right part and B’s right part into one set. (Let’s name this set”RightPart”)
+// Put A’s left part and B’s left part into one set. (Let’s name this set “LeftPart”)
+// Put A’s right part and B’s right part into one set. (Let’s name this set”RightPart”)
 
-        LeftPart           |            RightPart
-{ A[0], A[1], … , A[i - 1] }	{ A[i], A[i + 1], … , A[m - 1] }
-{ B[0], B[1], … , B[j - 1] }	{ B[j], B[j + 1], … , B[n - 1] }
-If we can ensure the following:
-LeftPart’s length == RightPart’s length (or RightPart’s length + 1)
-All elements in RightPart is greater than elements in LeftPart,
-then we can split all elements in {A, B} into two parts with equal length, and one part is always greater than the other part.
+//         LeftPart           |            RightPart
+// { A[0], A[1], … , A[i - 1] }	{ A[i], A[i + 1], … , A[m - 1] }
+// { B[0], B[1], … , B[j - 1] }	{ B[j], B[j + 1], … , B[n - 1] }
+// If we can ensure the following:
+// LeftPart’s length == RightPart’s length (or RightPart’s length + 1)
+// All elements in RightPart is greater than elements in LeftPart,
+// then we can split all elements in {A, B} into two parts with equal length, and one part is always greater than the other part.
 
-Then the median can thus be easily found.
-
-Based on condition 1, can you derive the value of j if value of i is known?
-Can you binary search on i ?
+// Then the median can thus be easily found.
+// Based on condition 1, can you derive the value of j if value of i is known?
+// Can you binary search on i ?
 
 
 // First Method :-
@@ -45,11 +51,9 @@ double Solution::findMedianSortedArrays(const vector<int> &nums1, const vector<i
         
     int l = 0, h = n;
     
-    while(l <= h)
-    {
+    while(l <= h){
         int cut1 = (l + h) / 2;
         int cut2 = ((m + n) / 2) - cut1;
-        
         
         int l1 = (cut1 == 0) ? INT_MIN : nums1[cut1-1];
         int l2 = (cut2 == 0) ? INT_MIN : nums2[cut2-1];

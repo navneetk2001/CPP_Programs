@@ -2,18 +2,30 @@
 // (For example: [1, 2, 3, 1, 2] has 3 different integers 1, 2 and 3)
 // Return the number of good subarrays of A.
 
+// Input 1:
+//  A = [1, 2, 1, 2, 3]
+//  B = 2
+// Output 1: 7
+// Explanation 1:  Subarrays formed with exactly 2 different integers: [1, 2], [2, 1], [1, 2], [2, 3], [1, 2, 1], [2, 1, 2], [1, 2, 1, 2].
+
+// Input 2:
+//  A = [1, 2, 1, 3, 4]
+//  B = 3
+// Output 2: 3
+// Explanation 2:  Subarrays formed with exactly 3 different integers: [1, 2, 1, 3], [2, 1, 3], [1, 3, 4].
+
 //Hint 
-To directly count the subarrays with exactly B different integers is hard but to find the count of subarrays with at most B different integers is easy.
-So think how will you find the number of subarray with at most B distinct integers and try to find a solution to the problem.
+// To directly count the subarrays with exactly B different integers is hard but to find the count of subarrays with at most B different integers is easy.
+// So think how will you find the number of subarray with at most B distinct integers and try to find a solution to the problem.
 
 //Solution Approach :-
-Approach:
-To directly count the subarrays with exactly B different integers is hard but to find the count of subarrays with at most B different integers is easy.
-So the idea is to find the count of subarrays with at most B different integers, let it be C(B), and the count of subarrays with at most (B - 1) different integers, let it be C(B - 1) and finally take their difference, C(B) – C(B – 1) which is the required answer.
-Count of subarrays with at most B different elements can be easily calculated through the sliding window technique.
-The idea is to keep expanding the right boundary of the window till the count of distinct elements in the window is less than or equal to B and when the count of distinct elements inside the window becomes more than B, start shrinking the window from the left till the count becomes less than or equal to B. Also for every expansion, keep counting the subarrays as right – left + 1 where right and left are the boundaries of the current window.
-Time Complexity: O(|A|)
-Space Complexity: O(|A|)
+// Approach:
+// To directly count the subarrays with exactly B different integers is hard but to find the count of subarrays with at most B different integers is easy.
+// So the idea is to find the count of subarrays with at most B different integers, let it be C(B), and the count of subarrays with at most (B - 1) different integers, let it be C(B - 1) and finally take their difference, C(B) – C(B – 1) which is the required answer.
+// Count of subarrays with at most B different elements can be easily calculated through the sliding window technique.
+// The idea is to keep expanding the right boundary of the window till the count of distinct elements in the window is less than or equal to B and when the count of distinct elements inside the window becomes more than B, start shrinking the window from the left till the count becomes less than or equal to B. Also for every expansion, keep counting the subarrays as right – left + 1 where right and left are the boundaries of the current window.
+// Time Complexity: O(|A|)
+// Space Complexity: O(|A|)
 
 
 //First Solution
@@ -26,11 +38,9 @@ int subarray(vector<int> &A,int B){
 
     while(i<n){
         m[A[i]]++;
-        while(m.size()>B)
-        {
+        while(m.size()>B){
             m[A[j]]--;
-            if(m[A[j]] == 0)
-            {
+            if(m[A[j]] == 0){
                 m.erase(A[j]);
             }
             j++;

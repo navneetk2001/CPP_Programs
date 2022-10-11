@@ -1,19 +1,19 @@
-
-
-
-
-
-
+// Given a singly linked list, determine if its a palindrome. Return 1 or 0 denoting if its a palindrome or not, respectively.
+// Notes:
+// Expected solution is linear in time and constant in space.
+// For example,
+// List 1-->2-->1 is a palindrome.
+// List 1-->2-->3 is not a palindrome.
 
 
 //Hint :-
-We need to check if first half is equal to last half(when reversed). But you can not store different copy of reversed last half as this solution will not have constant space.
-Can you modify the original list to do the above task?
+// We need to check if first half is equal to last half(when reversed). But you can not store different copy of reversed last half as this solution will not have constant space.
+// Can you modify the original list to do the above task?
 
 //Solution Approach :-
-To check palindrome, we just have to reverse latter half of linked list and then we can in (n/2) steps total can compare if all elements are same or not.
-For finding mid point, first we can in O(N) traverse whole list and calculate total number of elements.
-Reversing is again O(N).
+// To check palindrome, we just have to reverse latter half of linked list and then we can in (n/2) steps total can compare if all elements are same or not.
+// For finding mid point, first we can in O(N) traverse whole list and calculate total number of elements.
+// Reversing is again O(N).
 
 // First Method :-
 int Solution::lPalin(ListNode* A) {
@@ -27,18 +27,19 @@ int Solution::lPalin(ListNode* A) {
     int n=v.size();
     for(int i=0;i<n/2;i++)
     {
-        if(v[i]!=v[n-1-i])
+        if(v[i]!=v[n-1-i]){
             return 0;
-        else
+        }
+        else{
             continue;
+        }
     }
     return 1;
 }
 
 
 //Second Method :-
-ListNode *llreverser(ListNode *head)
-{
+ListNode *llreverser(ListNode *head){
     ListNode *pre, *curr, *nex;
     pre = nex = NULL;
     curr = head;
@@ -64,8 +65,7 @@ ListNode *midFinder(ListNode *f)
     return slow;
 }
 
-int ans(ListNode *h1, ListNode *h2)
-{
+int ans(ListNode *h1, ListNode *h2){
     int re=1;
     while(h1 && h2){
         if(h1->val !=h2->val){
@@ -101,11 +101,13 @@ int Solution::lPalin(ListNode* A) {
     temp=A;
     while(temp!=NULL)
     {
-        if (temp->val != values.top())
+        if (temp->val != values.top()){
             return 0;
-        else
+        }
+        else{
             values.pop();
             temp=temp->next;
+        }
     }
     return 1;
 }

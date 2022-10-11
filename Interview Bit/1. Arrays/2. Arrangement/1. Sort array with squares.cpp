@@ -3,10 +3,6 @@
 // You need to create another array containing the squares of all the elements in A and return it in non-decreasing order.
 // Try to this in O(N) time.
 
-// Problem Constraints
-// 1 <= N <= 105.
-
-// -103 <= A[i] <= 103
 
 
 // Hint 1 
@@ -32,20 +28,19 @@ vector<int> Solution::solve(vector<int> &A) {
     vector<int>ans(n);
     int k=0;
     for(int k=0;k<n;k++){
-        if(A[k]>=0) 
+        if(A[k]>=0) {
            break;
+        }
     }
     int i=k-1;
     int j=k;
     int index=0;
     while(i>=0 && j<n){
         if(A[i]*A[i] < A[j]*A[j]){
-            //ans.push_back(A[i]*A[i]);
             ans[index]=A[i]*A[i];
             i--;
         }
         else{
-            //ans.push_back(A[j]*A[j]);
             ans[index]=A[j]*A[j];
             j++;
         }
@@ -53,13 +48,11 @@ vector<int> Solution::solve(vector<int> &A) {
     }
 
     while(i>=0){
-        //ans.push_back(A[i]*A[i]);
         ans[index]=A[i]*A[i];
         i--;
         index++;
     }
     while(j<n){
-        //ans.push_back(A[j]*A[j]);
         ans[index]=A[j]*A[j];
         j++;
         index++;

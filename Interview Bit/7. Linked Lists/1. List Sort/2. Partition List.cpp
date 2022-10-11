@@ -1,15 +1,15 @@
-Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
-You should preserve the original relative order of the nodes in each of the two partitions.
-For example,
-Given 1->4->3->2->5->2 and x = 3,
-return 1->2->2->4->3->5.
+// Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+// You should preserve the original relative order of the nodes in each of the two partitions.
+// For example,
+// Given 1->4->3->2->5->2 and x = 3,
+// return 1->2->2->4->3->5.
 
 //Hint
-Another pointer game. Traverse the list while maintaining two pointers( what should they represent?).
+//Another pointer game. Traverse the list while maintaining two pointers( what should they represent?).
 
 //Solution Approach :-
-Maintain 2 pointers - one which maintains all nodes less than x and another which maintains nodes greater than or equal to x.
-Keep going along our list. When we are at node that is greater than or equal to x, we remove this node from our list and move it to list of nodes greater than x.
+// Maintain 2 pointers - one which maintains all nodes less than x and another which maintains nodes greater than or equal to x.
+// Keep going along our list. When we are at node that is greater than or equal to x, we remove this node from our list and move it to list of nodes greater than x.
 
 
 // First Method :-
@@ -17,6 +17,7 @@ ListNode* Solution::partition(ListNode* A, int B) {
     ListNode* head=A;
     ListNode* before_head=new ListNode(0);
     ListNode* before=before_head;
+    
     ListNode* after_head=new ListNode(0);
     ListNode* after=after_head;
 
@@ -47,19 +48,17 @@ ListNode* Solution::partition(ListNode* A, int B) {
     {
         rem=temp;
         cnt++;
-        if(temp->val<B)
-        {
+        if(temp->val<B){
             ans1.push_back(temp->val);
         }
-        else if(temp->val>=B)
-        {
+        else if(temp->val>=B){
             ans2.push_back(temp->val);
         }
         temp=temp->next;
         free(rem);
     }
-    for(int i=0;i<ans2.size();i++)
-    {
+
+    for(int i=0;i<ans2.size();i++){
         ans1.push_back(ans2[i]);
     }
     ans2.clear();
@@ -74,12 +73,12 @@ ListNode* Solution::partition(ListNode* A, int B) {
 }
 
 //Third Method :-
-void swap(ListNode* a,ListNode* b)
-{
+void swap(ListNode* a,ListNode* b){
     int temp=a->val;
     a->val=b->val;
     b->val=temp;
 }
+
 ListNode* Solution::partition(ListNode* A, int B) {
     ListNode* i=NULL;
     ListNode* j=NULL;
@@ -139,8 +138,8 @@ ListNode* Solution::partition(ListNode* A, int B) {
 
 //Fourth Solution :-
 ListNode* Solution::partition(ListNode* head, int x) {
-	queue q1;
-	queue q2;
+	queue<int>q1;
+	queue<int>q2;
 	ListNode* curr=head;
 	int count=0;
 

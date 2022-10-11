@@ -1,41 +1,41 @@
-Geek is at the geek summer carnival. To unlock discounts on exclusive courses he is given a card with a binary tree, a target node and a positive integer k on it. 
-He needs to find the sum of all nodes within a max distance k from target node such that the target node is included in sum.
+// Geek is at the geek summer carnival. To unlock discounts on exclusive courses he is given a card with a binary tree, a target node and a positive integer k on it. 
+// He needs to find the sum of all nodes within a max distance k from target node such that the target node is included in sum.
 
-Example 1:
-Input:
-target = 9 
-k = 1
-Binary Tree = 
-            1
-           /  \
-          2    9
-        /     /  \
-       4     5    7
-      /  \       /  \
-     8    19    20   11
-    /   /   \
-  30   40   50
+// Example 1:
+// Input:
+// target = 9 
+// k = 1
+// Binary Tree = 
+//             1
+//            /  \
+//           2    9
+//         /     /  \
+//        4     5    7
+//       /  \       /  \
+//      8    19    20   11
+//     /   /   \
+//   30   40   50
 
-Output: 22
-Explanation: Nodes within distance 1 from 9 => 9 + 5 + 7 + 1 = 22
+// Output: 22
+// Explanation: Nodes within distance 1 from 9 => 9 + 5 + 7 + 1 = 22
 
-Example 2:
-Input:
-target = 40 
-k = 2
-Binary Tree = 
-            1
-           /  \
-          2    9
-        /     /  \
-       4     5    7
-      /  \       /  \
-     8    19    20   11
-    /   /   \
-  30   40   50
+// Example 2:
+// Input:
+// target = 40 
+// k = 2
+// Binary Tree = 
+//             1
+//            /  \
+//           2    9
+//         /     /  \
+//        4     5    7
+//       /  \       /  \
+//      8    19    20   11
+//     /   /   \
+//   30   40   50
 
-Output: 113
-Explanation: Nodes within distance 2 from 40, => 40 + 19 + 50 + 4 = 113
+// Output: 113
+// Explanation: Nodes within distance 2 from 40, => 40 + 19 + 50 + 4 = 113
 
 
 

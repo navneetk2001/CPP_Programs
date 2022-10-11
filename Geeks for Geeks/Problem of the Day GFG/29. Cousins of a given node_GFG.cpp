@@ -106,29 +106,29 @@ int getLevel(Node *root, Node *node, int level)
 	return getLevel(root->right, node, level + 1);
 }
 
-/* Print nodes at a given level such that
-sibling of node is not printed if it exists */
+/* Print nodes at a given level such that sibling of node is not printed if it exists */
 void printGivenLevel(Node* root, Node *node, int level)
 {
 	// Base cases
 	if (root == NULL || level < 2)
 		return;
 
-	// If current node is parent of a node
-	// with given level
+	// If current node is parent of a node with given level
 	if (level == 2)
 	{
-		if (root->left == node || root->right == node)
+		if (root->left == node || root->right == node){
 			return;
-		if (root->left)
+        }
+		if (root->left){
 			cout << root->left->data << " ";
-		if (root->right)
+        }
+		if (root->right){
 			cout << root->right->data;
+        }
 	}
 
 	// Recur for left and right subtrees
-	else if (level > 2)
-	{
+	else if (level > 2){
 		printGivenLevel(root->left, node, level - 1);
 		printGivenLevel(root->right, node, level - 1);
 	}

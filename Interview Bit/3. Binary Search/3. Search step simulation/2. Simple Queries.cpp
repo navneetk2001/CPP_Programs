@@ -1,29 +1,27 @@
-You are given an array A having N integers.
-You have to perform the following steps in a given order.
-1) generate all subarrays of A.
-2) take the maximum element from each subarray of A and insert it into a new array G.
-3) replace every element of G with the product of their divisors mod 1e9 + 7.
-4 sort G in descending order
+// You are given an array A having N integers.
+// You have to perform the following steps in a given order.
+// 1) generate all subarrays of A.
+// 2) take the maximum element from each subarray of A and insert it into a new array G.
+// 3) replace every element of G with the product of their divisors mod 1e9 + 7.
+// 4 sort G in descending order
 
-You now need to perform Q queries
-In each query, you are given an integer K, where you have to find the Kth element in G.
-NOTE : Your solution will run on multiple test cases so do clear global variables after using them
-
-
+// You now need to perform Q queries
+// In each query, you are given an integer K, where you have to find the Kth element in G.
+// NOTE : Your solution will run on multiple test cases so do clear global variables after using them
 
 //Hint 1
-A brute force solution to solve this problem is to do as instructed in the statement.
-But this will give time out.
-So can we reduce complexity?
-Can we do Binary Search for each query?
-do you know product of divisors of a number can be written as N D/2, where N is number and D is number of divisors of N.
+// A brute force solution to solve this problem is to do as instructed in the statement.
+// But this will give time out.
+// So can we reduce complexity?
+// Can we do Binary Search for each query?
+// do you know product of divisors of a number can be written as N D/2, where N is number and D is number of divisors of N.
 
 //Solution Approach
-We can solve this problem by doing the binary search for each query.
-How?
-First, you need to find that how many times an element will appear in array G. i.e in how many subarrays an element is the greatest one.
-You can find that by finding the next greater element for the current element in both sides and then by multiplying them.
-Once you found the frequency of each element in an array G, you can sort the pairs(product_of_divisors_of_element, frequency) according to there value in descending order followed by taking the prefix sum of there frequencies you can do the binary search for each query.
+// We can solve this problem by doing the binary search for each query.
+// How?
+// First, you need to find that how many times an element will appear in array G. i.e in how many subarrays an element is the greatest one.
+// You can find that by finding the next greater element for the current element in both sides and then by multiplying them.
+// Once you found the frequency of each element in an array G, you can sort the pairs(product_of_divisors_of_element, frequency) according to there value in descending order followed by taking the prefix sum of there frequencies you can do the binary search for each query.
 
 
 // First Method :-

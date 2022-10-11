@@ -11,15 +11,15 @@ Return :
           2   3
 
 //Hint :-
-Last element of postorder traversal will be root. Combine this info with inorder traversal. How can this help you?
+//Last element of postorder traversal will be root. Combine this info with inorder traversal. How can this help you?
 
 //Solution Approach :- 
-Focus on the postorder traversal to begin with.
-The last element in the traversal will definitely be the root.
-Based on this information, can you identify the elements in the left subtree and right subtree ? ( Hint : Focus on inorder traversal and root information )
-Once you do that, your problem has now been reduced to a smaller set. Now you have the inorder and postorder traversal for the left and right subtree and you need to figure them out.
-Divide and conquer.
-Bonus points if you can do it without recursion.
+// Focus on the postorder traversal to begin with.
+// The last element in the traversal will definitely be the root.
+// Based on this information, can you identify the elements in the left subtree and right subtree ? ( Hint : Focus on inorder traversal and root information )
+// Once you do that, your problem has now been reduced to a smaller set. Now you have the inorder and postorder traversal for the left and right subtree and you need to figure them out.
+// Divide and conquer.
+// Bonus points if you can do it without recursion.
 
 
 //First Solution :-
@@ -41,7 +41,7 @@ TreeNode* Solution::buildTree(vector<int> &A, vector<int> &B) {
 
 //Second Solution :- 
 TreeNode* build(unordered_map<int, int> &ino, vector<int> &post, int s, int e, int &ind) {
-    if ( s > e ) {
+    if (s > e) {
         return NULL;
     }
     int x = post[ind];
@@ -58,8 +58,8 @@ TreeNode* build(unordered_map<int, int> &ino, vector<int> &post, int s, int e, i
 
 TreeNode* Solution::buildTree(vector<int> &ino, vector<int> &post) {
     unordered_map<int, int> mp;
-    for ( int i = 0; i < post.size(); ++i ) {
-        mp[ ino[i] ] = i;
+    for (int i = 0; i < post.size(); ++i ) {
+        mp[ino[i]] = i;
     } 
     int ind = post.size()-1;
     return build(mp, post, 0, post.size()-1, ind);

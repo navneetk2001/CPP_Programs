@@ -3,18 +3,22 @@
 // He wants to find out whether there are enough rooms in the hotel to satisfy the demand. 
 // Write a program that solves this problem in time O(N log N) .
 
+// Input 1:
+//  A = [1, 3, 5]
+//  B = [2, 6, 8]
+//  C = 1
+// Output 1: 0
+// Explanation 1: At day = 5, there are 2 guests in the hotel. But I have only one room.
 
 //Solution Approach
-Solution approach :
+// Solution approach :
+// 1. Create event points for every interval start, and end. 
+// 2. Sort it according to the day. 
+// 3. Now, iterate over them one by one. If you encounter a start, then the number of active guests increase by one. If you encounter an end, the number of active guests decrease by one. 
+// 4. If at any point, the number of active guests exceed K, we know that scheduling is not possible. 
 
-1. Create event points for every interval start, and end. 
-2. Sort it according to the day. 
-3. Now, iterate over them one by one. If you encounter a start, then the number of active guests increase by one. If you encounter an end, the number of active guests decrease by one. 
-4. If at any point, the number of active guests exceed K, we know that scheduling is not possible. 
+// GOTCHAS : What if there are multiple start and end on the same day ? How should they be ordered ?
 
-GOTCHAS : What if there are multiple start and end on the same day ? How should they be ordered ?
-
-Happy Coding
 
 
 
@@ -35,10 +39,7 @@ bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
         
     }
     return cnt<= K;
-    
 }
-
-
 
 
 //Second Method :-
@@ -57,17 +58,30 @@ bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
 
 //Third Solution :-
 bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
-sort(arrive.begin(),arrive.end());
-sort(depart.begin(),depart.end());
-int rooms=K;
-int n=arrive.size();
-int m=depart.size();
-int i=0,j=0;
-while(i<n||j<m)
-{
-    if(i<n && j<m)
+    sort(arrive.begin(),arrive.end());
+    sort(depart.begin(),depart.end());
+    int rooms=K;
+    int n=arrive.size();
+    int m=depart.size();
+    int i=0,j=0;
+    while(i<n||j<m)
     {
-        if(arrive[i]<depart[j])
+        if(i<n && j<m)
+        {
+            if(arrive[i]<depart[j])
+            {
+                if(rooms==0)
+                    return false;
+                rooms--;
+                i++;
+            }
+            else
+            {
+                rooms++;
+                j++;
+            }
+        }
+        else if(i<n)
         {
             if(rooms==0)
                 return false;
@@ -79,23 +93,9 @@ while(i<n||j<m)
             rooms++;
             j++;
         }
-    }
-    else if(i<n)
-    {
-        if(rooms==0)
-            return false;
-        rooms--;
-        i++;
-    }
-    else
-    {
-        rooms++;
-        j++;
-    }
 
-}
-return true;
-
+    }
+    return true;
 }
 
 
@@ -110,7 +110,7 @@ bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
           if(count<0 || count>K) return false;
       }
       return true;
-  }
+}
 
 
   //Fifth Method 

@@ -2,13 +2,24 @@
 // Check whether there exists any permutation of both A and B such that they are equal.
 // Return a single integer 1 if its exists, 0 otherwise.
 
+// Input 1:
+// A = 'scaler'
+// B = 'relasc'
+// Output 1: 1
+// Explanation 1: We can rearrange the second string to 'scaler', hence, a permuation exists.
+
+// Input 2:
+// A = 'scaler'
+// B = 'interviewbit'
+// Output 2: 0
+// Explanation 2: The given length of the two strings itself is different. There is no possible permutation.
 
 //Solution Approach
-For any permutation of a given string, the frequency of each character will never change.
-So, if we check the frequency all the characters of both the strings.
-We can find out if they can be permuted to form an equal string.
-We can simply do this by keeping an auxillary array to keep the count of the characters.
-And checking if all the indexes have equal frequency.
+// For any permutation of a given string, the frequency of each character will never change.
+// So, if we check the frequency all the characters of both the strings.
+// We can find out if they can be permuted to form an equal string.
+// We can simply do this by keeping an auxillary array to keep the count of the characters.
+// And checking if all the indexes have equal frequency.
 
 
 

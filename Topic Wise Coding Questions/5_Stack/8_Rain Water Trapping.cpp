@@ -1,50 +1,66 @@
-int Solution::trap(const vector<int> &A) {
-    int n=A.size();
-    int maxL[n];    //maximum from left
-    int maxR[n];    //maximum from right
-    int water[n];   //water in each tank
-    int sum=0;
+https://practice.geeksforgeeks.org/problems/trapping-rain-water-1587115621/1
 
-    maxL[0]=A[0];
-    for (int i = 1; i < n; ++i)
-    {
-        maxL[i]=max(maxL[i-1],A[i]);     //storing all the maximum values from the left
+
+
+//Solution Approach -
+class Solution{
+public:
+    // Function to find the trapped water between the blocks.
+    long long trappingWater(int A[], int n){
+        int maxL[n];    //maximum from left
+        int maxR[n];    //maximum from right
+        int water[n];   //water in each tank
+        long long sum=0;
+    
+        maxL[0]=A[0];
+        for (int i = 1; i < n; ++i)
+        {
+            maxL[i]=max(maxL[i-1],A[i]);     //storing all the maximum values from the left
+        }
+    
+        maxR[n-1]=A[n-1];
+        for (int i = n-2; i >= 0; --i)
+        {
+            maxR[i]=max(maxR[i+1],A[i]);     //storing all the maximum values from the right
+        }
+    
+        for(int i=0;i<n;i++){
+            water[i]=min(maxL[i],maxR[i])-A[i];  //taking minimum of each value from maximum and minimum and finding water stored
+            sum+=water[i];
+        }
+    
+        return sum;
     }
-
-    maxR[n-1]=A[n-1];
-    for (int i = n-2; i >= 0; --i)
-    {
-        maxR[i]=max(maxR[i+1],A[i]);     //storing all the maximum values from the right
-    }
-
-    for(int i=0;i<n;i++){
-        water[i]=min(maxL[i],maxR[i])-A[i];  //taking minimum of each value from maximum and minimum and finding water stored
-        sum+=water[i];
-    }
-
-    return sum;
-}
+};
 
 
 
 //Second Solution :-  Using two pointers Approach 
-int Solution::trap(const vector<int> &A) {
-    int l=0,r=A.size()-1;
-    int ans=0,lm=0,rm=0;
-    while(l<r){
-        if(A[l]<A[r]){
-            lm=max(lm,A[l]);
-            ans+=lm-A[l];
-            l++;
+class Solution{
+public:
+    // Function to find the trapped water between the blocks.
+    long long trappingWater(int A[], int n){
+        int l = 0, r = n - 1;
+        long long ans = 0;
+        int lm = 0, rm = 0;
+        
+        while(l < r){
+            if(A[l] < A[r]){
+                lm = max(lm, A[l]);
+                ans += lm - A[l];
+                l++;
+            }
+            else{
+                rm = max(rm, A[r]);
+                ans += rm - A[r];
+                r--;
+            }
         }
-        else{
-            rm=max(rm,A[r]);
-            ans+=rm-A[r];
-            r--;
-        }
+        return ans;
     }
-    return ans;
-}
+};
+
+
 
 
 //Third Solution :- Tried an innovative solution (stack+queue combined xD)

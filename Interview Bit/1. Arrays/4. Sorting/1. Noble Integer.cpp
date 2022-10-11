@@ -1,25 +1,29 @@
 //Given an integer array A, find if an integer p exists in the array such that the number of integers greater than p in the array equals to p.
 
+// Input 1: A = [3, 2, 1, 3]
+// Output 1: 1
+// Explanation 1: For integer 2, there are 2 greater elements in the array. So, return 1.
 
+// Input 2: A = [1, 1, 3, 3]
+// Output 2: -1
+// Explanation 2: There is no such integer exists.
 
 //Hint 1
-The straightforward approach is to for every element find how many integers are greater than that, and if that matches our given statement then we have our answer.
-Will sorting the array help?
+// The straightforward approach is to for every element find how many integers are greater than that, and if that matches our given statement then we have our answer.
+// Will sorting the array help?
 
 //Solution Approach 
-First we sort the input array.
-Now, all we have to do is to traverse through each element of the array and check whether it matches our given statement, since the array is sorted we directly know how many elements are greater than that number in the array.
-Note: Please take care of cases, when certain element repeats many times.
-
-
-
-
+// First we sort the input array.
+// Now, all we have to do is to traverse through each element of the array and check whether it matches our given statement, since the array is sorted we directly know how many elements are greater than that number in the array.
+// Note: Please take care of cases, when certain element repeats many times.
 
 
 //First Method :-
 int Solution::solve(vector<int> &A) {
     sort(A.begin(), A.end());
-    if(A[A.size()-1]==0) return 1;
+    if(A[A.size()-1]==0){ 
+        return 1;
+    }
 
     for(int i=0;i<A.size()-1;i++){
         if(A[i]==(A.size() -(i+1)) && i+1<A.size()  && A[i]<A[i+1]){
@@ -34,17 +38,17 @@ int Solution::solve(vector<int> &A) {
 int Solution::solve(vector &A) {
 	int n=A.size();
 	sort(A.begin(),A.end());
-	if(A[n-1]==0)
+	if(A[n-1]==0){
 	    return 1;
+    }
 	
-	for(int i=1;i<n;i++)
-	{
-	  while(A[i-1]==A[i] && i<n)
-	  {
-	      i++;
-	  }
-	  if(i<n && n-i==A[i-1])
-	     return 1;
+	for(int i=1;i<n;i++){
+	    while(A[i-1]==A[i] && i<n)
+	    {
+	        i++;
+	    }
+	    if(i<n && n-i==A[i-1])
+	        return 1;
 	}
 	return -1;
 }

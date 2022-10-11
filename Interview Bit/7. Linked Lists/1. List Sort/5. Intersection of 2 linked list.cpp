@@ -1,3 +1,7 @@
+https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+
+
 ListNode* getIntersectionNode(ListNode* A, ListNode*B){
 	if(A==NULL || B==NULL){
 		return NULL;
@@ -23,7 +27,6 @@ ListNode* getIntersectionNode(ListNode* A, ListNode*B){
 	}
 	return head1;
 }
-
 
 
 
@@ -68,17 +71,18 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
 
 
 
-Approach 3 : Using Floyad cylcle in Linked list(little bit of tricky but easy to understand and interesting solution)
+// Approach 3 : 
+//Using Floyad cylcle in Linked list(little bit of tricky but easy to understand and interesting solution)
 
-Steps :
-1 find tail of any LL
-2 link tail of LL you have found to the head of another LL
-3 create 2 ptr slow and fast and move them
-slow = slow->next , fast = fast->next->next
-4 whenever your slow and fast pointer meets that means there is a cycle present and a intersection point also.
-5 again bring slow pointer to the starting position and move both pointer by one position untill both meet again
-6 the point where they will meet that will be your intersection point
-7 after finding ans Node make LL unchanged by removing connection of head and tail
+// Steps :
+// 1 find tail of any LL
+// 2 link tail of LL you have found to the head of another LL
+// 3 create 2 ptr slow and fast and move them
+// slow = slow->next , fast = fast->next->next
+// 4 whenever your slow and fast pointer meets that means there is a cycle present and a intersection point also.
+// 5 again bring slow pointer to the starting position and move both pointer by one position untill both meet again
+// 6 the point where they will meet that will be your intersection point
+// 7 after finding ans Node make LL unchanged by removing connection of head and tail
 
 
 
@@ -86,10 +90,10 @@ class Solution {
 public:
 // floyd cycle algo
 ListNode* floyad(ListNode* head){
-//base case
-if(head == NULL || head->next == NULL){
-return NULL;
-}
+        //base case
+    if(head == NULL || head->next == NULL){
+        return NULL;
+    }
 
     ListNode* slow = head;
     ListNode* fast = head;
@@ -118,8 +122,7 @@ return NULL;
 
 
 ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-    // base case
-    if(headA == NULL || headB == NULL){
+    if(headA == NULL || headB == NULL){    // base case
         return NULL;
     }
     

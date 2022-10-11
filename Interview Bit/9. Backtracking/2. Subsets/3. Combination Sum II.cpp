@@ -16,22 +16,23 @@
 // Example : itertools.combinations in python.
 
 //Hint :-
-Think how can you use recursion with current index and target sum in order to generate all combinations.
-Also, you will have to take special care of those elements which can be overcounted as they are repeated.
+// Think how can you use recursion with current index and target sum in order to generate all combinations.
+// Also, you will have to take special care of those elements which can be overcounted as they are repeated.
 
 //Solution Approach :- 
-Some elements can be repeated in the input set. Make sure you iterate over the number of occurrences of those elements to make sure you are not counting the same combinations again.
-Once you do that, things are fairly straightforward. You make a recursive call with the remaining sum and make sure the indices are moving forward.
+// Some elements can be repeated in the input set. Make sure you iterate over the number of occurrences of those elements to make sure you are not counting the same combinations again.
+// Once you do that, things are fairly straightforward. You make a recursive call with the remaining sum and make sure the indices are moving forward.
 
 //First Solution :-
-void solve(int i, vector<int>& arr, vector<int>& temp, int target, set<vector<int> > &sets){
+void solve(int i, vector<int>& arr, vector<int>& temp, int target, set<vector<int>> &sets){
     if(target == 0){
         sets.insert(temp); 
         return; 
     }
    
-    if(i >= arr.size()  || target < 0)
+    if(i >= arr.size()  || target < 0){
         return;
+    }
     
     //not taking
     solve(i + 1, arr, temp, target, sets);
@@ -41,7 +42,7 @@ void solve(int i, vector<int>& arr, vector<int>& temp, int target, set<vector<in
     temp.pop_back(); 
 }
 
-vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+vector<vector<int>> Solution::combinationSum(vector<int> &A, int B) {
     vector<int> temp; 
     vector<vector<int>> ans;
     set<vector<int>> sets;
@@ -86,6 +87,7 @@ public:
         return ans;
     }
 };
+
 
 //Third Solution :- 
 class Solution {

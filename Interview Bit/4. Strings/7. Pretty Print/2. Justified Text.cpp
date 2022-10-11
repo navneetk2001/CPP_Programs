@@ -15,71 +15,62 @@
 
 
 //Hint :-
-This problem is more of simulation. Take care of some of corner cases like space distribution in different lines.
-Try to write an elegant solution.
+// This problem is more of simulation. Take care of some of corner cases like space distribution in different lines.
+// Try to write an elegant solution.
 
 //Solution Approach :-
-Corner Cases:
-1. A line other than the last line might contain only one word. What should you do in this case?
-In this case, that line should be left-justified.
-2) Have you noticed that the last line is an exception in terms of spaces?
-This is more of a simulation problem. The more elegant your code, the less chances of it being bug prone,
-and more marks in the interview.
-Give a lot of thought to the structure of the code before you start coding.
+// Corner Cases:
+// 1. A line other than the last line might contain only one word. What should you do in this case?
+//    In this case, that line should be left-justified.
+// 2) Have you noticed that the last line is an exception in terms of spaces?
+// This is more of a simulation problem. The more elegant your code, the less chances of it being bug prone, and more marks in the interview.
+// Give a lot of thought to the structure of the code before you start coding.
 
 
 //First Solution :-
-Notes:
+// Notes:
+// For a fully-justified line, the number of spots where we could add extra spaces is equal to
+// (number of words on the line - 1) since we add spaces only inbetween words.
+// Then we can compute the number of spaces we should add into each of these spots as
+// (number of extra spaces / (number of words on the line - 1)).
+// However, this leads to left over extra spaces the number of which is computed by
+// (number of extra spaces % (number of words on the line - 1))
 
-For a fully-justified line, the number of spots where we could add extra spaces is equal to
-(number of words on the line - 1) since we add spaces only inbetween words.
-Then we can compute the number of spaces we should add into each of these spots as
-(number of extra spaces / (number of words on the line - 1)).
-However, this leads to left over extra spaces the number of which is computed by
-(number of extra spaces % (number of words on the line - 1))
-
-In the loop where we construct a fully-justified line, we compute the number of "left over" extra spaces beforehand. These left over spaces are appended to the line in addition to the words, first space, and extra spaces as long as there is at least one remaining. Everytime a left over space is used, the number is decremented.
+// In the loop where we construct a fully-justified line, we compute the number of "left over" extra spaces beforehand. These left over spaces are appended to the line in addition to the words, first space, and extra spaces as long as there is at least one remaining. Everytime a left over space is used, the number is decremented.
 
 class Solution {
 public:
     vector<string> fullJustify(vector<string>& words, int maxWidth) {
-        vector<string> sol; // Holds the solution
-        int curWord = 0;    // An index into words array
+        vector<string> sol;     // Holds the solution
+        int curWord = 0;        // An index into words array
         
         // Continue building lines if there are more words
         while (curWord < words.size()) {
-            // After the next while loop, firstWord holds the index
-            // of the first word on our line and curWord holds the
-            // index of the last word on our line
+            // After the next while loop, firstWord holds the index of the first word on our line and curWord holds the index of the last word on our line
             int firstWord = curWord;
             int numCharsOnLine = words[curWord].size();
             
-            // Add the next word to the line while adding the word does not push
-            // us past the maxWidth
+            // Add the next word to the line while adding the word does not push us past the maxWidth
             // Note: We must account for the minimum of one space between each word
             //       This is why we have words[curWord+1].size() + 1
-            while (curWord + 1 < words.size() &&
-                   numCharsOnLine + words[curWord+1].size() + 1 <= maxWidth) {
+            while (curWord + 1 < words.size() && numCharsOnLine + words[curWord+1].size() + 1 <= maxWidth) {
                 numCharsOnLine += words[curWord+1].size() + 1;
                 curWord += 1;
             }
             
-            // Compute the number of words on the next line
-            // and the number of extra spaces we need to fill in the line
+            // Compute the number of words on the next line and the number of extra spaces we need to fill in the line
             int numWordsOnLine = curWord - firstWord + 1;
             int numExtraSpaces = maxWidth - numCharsOnLine;
-            
             
             string line = "";   // Holds the next line
             
             // Determine if the next line will be fully-justified or left-justified
             if (curWord < words.size() - 1 && numWordsOnLine > 1) {
-                // Line will be fully justified
-                int paddingPerWord = numExtraSpaces / (numWordsOnLine - 1);
+                
+                int paddingPerWord = numExtraSpaces / (numWordsOnLine - 1);    // Line will be fully justified
                 int leftOverSpaces = numExtraSpaces % (numWordsOnLine - 1);
                 
-                // Construct line and evenly distribute extra spaces
-                string padding = string(paddingPerWord, ' ');
+                string padding = string(paddingPerWord, ' ');       // Construct line and evenly distribute extra spaces
                 
                 // Add each word except the last one
                 while (firstWord < curWord) {
@@ -128,15 +119,13 @@ public:
 
 
 //Second Solution :-
-class Solution
-{
+class Solution{
 public:
 vector<string> fullJustify(vector& words, int maxWidth) {
     vector<string>vec;
     int i = 0;
     
-    while(i<words.size())
-    {
+    while(i<words.size()){
         int j = i+1;
         int sum = words[i].length();
         int curr = 0;
@@ -151,10 +140,10 @@ vector<string> fullJustify(vector& words, int maxWidth) {
         int more = (curr==0)?0:(maxWidth - sum)%curr;
         if(j==words.size())
         {
-             for(int k=i;k<j;k++)
+            for(int k=i;k<j;k++)
             {
-                  now += words[k];
-                 now += " ";
+                now += words[k];
+                now += " ";
             }
             now.pop_back();
         }
@@ -191,7 +180,7 @@ vector<string> fullJustify(vector& words, int maxWidth) {
 
 //Third Solution :-
 vector<string> Solution::fullJustify(vector<string> &words, int L) {
-     vector<string> res;
+    vector<string> res;
     for(int i = 0, k, l; i < words.size(); i += k) {
         for(k = l = 0; i + k < words.size() and l + words[i+k].size() <= L - k; k++) {
             l += words[i+k].size();

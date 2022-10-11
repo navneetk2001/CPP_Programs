@@ -1,6 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+void dfs(int start, vector<int>g[],bool *visited){
+	visited[start]=true;
+	cout<<start<<" ";
+
+	for(int i=0;i<g[start].size();i++){
+		if(visited[g[start][i]]==false){
+			dfs(g[start][i],g,visited);
+		}
+	}
+}
+
+
 int main(){
 	int T;
 	cin>>T;
@@ -27,13 +40,3 @@ int main(){
 }
 
 
-void dfs(int start, vector<int>g[],bool *visited){
-	visited[start]=true;
-	cout<<start<<" ";
-
-	for(int i=0;i<g[start].size();i++){
-		if(visited[g[start][i]]==false){
-			dfs(g[start][i],g,visited);
-		}
-	}
-}

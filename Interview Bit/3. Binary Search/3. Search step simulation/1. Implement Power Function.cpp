@@ -3,13 +3,20 @@
 // find (x^n % d)
 // Note that remainders on division cannot be negative. In other words, make sure the answer you return is non negative.
 
+// Example Input:
+// x = 2
+// n = 3
+// d = 3
+// Example Output: 2
+// Example Explanation: 2^3 % 3 = 8 % 3 = 2.
+
 //Solution Approach
-There are two major things to note here:
-1. Overflow situation: Note that if x is large enough, multiplying x to the answer might overflow in integer.
-2) Multiplying x one by one to the answer is O(n). We are looking for something better than O(n).
-If n is even, note the following:
-x ^ n = (x * x) ^ n/2
-Can you use the above observation to come up with a solution better than O(n)?
+// There are two major things to note here:
+// 1. Overflow situation: Note that if x is large enough, multiplying x to the answer might overflow in integer.
+// 2) Multiplying x one by one to the answer is O(n). We are looking for something better than O(n).
+// If n is even, note the following:
+// x ^ n = (x * x) ^ n/2
+// Can you use the above observation to come up with a solution better than O(n)?
 
 
 // First Method :-
@@ -52,8 +59,9 @@ int Solution::pow(int x, int n, int p) {
             n /= 2;
         }
     }
-    if (ans < 0) 
+    if (ans < 0) {
         ans = (ans + p) % p;
+    }
     return ans;
 }
 

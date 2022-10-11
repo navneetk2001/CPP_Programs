@@ -13,22 +13,22 @@
 //     "abadbc" -   first non repeating character 'd'
 
 //Hint :-
-Think of using queue data structure to maintain the first non-repeating character.
+// Think of using queue data structure to maintain the first non-repeating character.
 
-We can do this using queue data structure and an hash array of size 26.
--> Create a count array of size 26(assuming only lower case characters are present) and initialize it with zero.
--> Create a queue of char datatype.
--> Store each character in queue and increase its frequency in the hash array.
--> For every character of stream, we check front of the queue.
--> If the frequency of character at the front of queue is one, then that will be the first non repeating character.
--> Else if frequency is more than 1, then we pop that element.
--> If queue became empty that means there are no non repeating character so we will append #.
+// We can do this using queue data structure and an hash array of size 26.
+// -> Create a count array of size 26(assuming only lower case characters are present) and initialize it with zero.
+// -> Create a queue of char datatype.
+// -> Store each character in queue and increase its frequency in the hash array.
+// -> For every character of stream, we check front of the queue.
+// -> If the frequency of character at the front of queue is one, then that will be the first non repeating character.
+// -> Else if frequency is more than 1, then we pop that element.
+// -> If queue became empty that means there are no non repeating character so we will append #.
 
 
 //First Solution :-
 string Solution::solve(string A) {
     queue<char> q;
-    vector<int>freq(26,0);   //will store the frequency of each char.
+    vector<int> freq(26,0);   //will store the frequency of each char.
 
     string ans="";    
     for(char ch:A){

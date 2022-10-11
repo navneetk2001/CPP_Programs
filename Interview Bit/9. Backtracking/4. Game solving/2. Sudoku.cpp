@@ -9,9 +9,9 @@
 // [[534678912], [672195348], [198342567], [859761423], [426853791], [713924856], [961537284], [287419635], [345286179]]
 
 //Solution Approach :- 
-Classic backtrack problem.
-Everytime you place an element x on row,col, you need to check if its still valid to put x on that position by double checking if x occurs more than once in the row or column or in its block. If not, you proceed by placing x, and call forward to check if a correct solution is possible with x in position row, col.
-If a solution is possible, you return the current configuration and you are done. Otherwise you try other values.
+// Classic backtrack problem.
+// Everytime you place an element x on row,col, you need to check if its still valid to put x on that position by double checking if x occurs more than once in the row or column or in its block. If not, you proceed by placing x, and call forward to check if a correct solution is possible with x in position row, col.
+// If a solution is possible, you return the current configuration and you are done. Otherwise you try other values.
 
 
 //First Solution :- Approach :-
@@ -24,7 +24,8 @@ If a solution is possible, you return the current configuration and you are done
 
 bool rowsafe(vector<vector<char>>& board, int row, int val ){
 	for(int i=0;i<9;i++){
-		if(board[row][i]==val) return false;
+		if(board[row][i]==val) 
+			return false;
 	}
 	return true;
 }
@@ -72,8 +73,9 @@ bool solve(vector<vector<char>>& board){
 }
 
 void Solution::solveSudoku(vector<vector<char>> &board) {
-	if(board.size()==0 )
-            return;
+	if(board.size()==0){
+        return;
+    }
     solve(board);
 }
 

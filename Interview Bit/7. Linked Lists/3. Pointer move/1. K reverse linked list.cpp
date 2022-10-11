@@ -8,9 +8,7 @@
 
 
 //Solution Approach
-Split the list into buckets of length K and then reverse each of them. After this you have to concatenate the buckets and return the list. To split the list into buckets of length K, use 2 pointers that are K elements afar. To reverse a linked list check this.
-
-
+//Split the list into buckets of length K and then reverse each of them. After this you have to concatenate the buckets and return the list. To split the list into buckets of length K, use 2 pointers that are K elements afar. To reverse a linked list check this.
 
 
 // First Method :-
@@ -42,23 +40,22 @@ ListNode* reverseKGroup(ListNode* head, int k){
 }
 
 
-//Second Method :-
-ListNode* reverseKGroup(ListNode* head, int k){
-	
-	ListNode *curr = head, *prev=NULL;
-	ListNode *nex;
-	int count = 0;
+//Second Method :- Recursive
+ListNode* Solution::reverseList(ListNode* A, int B) {
+    ListNode *curr = A, *prev=NULL;
+    ListNode *nex;
+    int count = 0;
 
-	while(curr!=NULL && count<k){
-		nex=curr->next;
-		curr->next=NULL;
-		prev=curr;
-		curr=nex;
-		count++;
-	}
+    while(curr!=NULL && count<B){
+        nex=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=nex;
+        count++;
+    }
     
     if(nex!=NULL){
-		head->next =reverseKGroup(nex,k);
+        A->next =reverseList(nex,B);
     }
 
     return prev;
@@ -66,14 +63,14 @@ ListNode* reverseKGroup(ListNode* head, int k){
 
 
 //Third Method :-
- int length(ListNode *x){
-     int l=0;
-     while(x){
-         l++;
-         x=x->next;
-     }
-     return l;
- }
+int length(ListNode *x){
+    int l=0;
+    while(x){
+        l++;
+        x=x->next;
+    }
+    return l;
+}
 
 ListNode* Solution::reverseList(ListNode* A, int B) {
     int l=length(A); 

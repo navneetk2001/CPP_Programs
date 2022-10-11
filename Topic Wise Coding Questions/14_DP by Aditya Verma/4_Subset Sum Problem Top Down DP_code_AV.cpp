@@ -3,20 +3,20 @@
 using namespace std;
 
 bool isSubsetPossible(int arr[], int n, int sum) {
-	bool t[n + 1][sum + 1]; // DP - matrix
+	bool t[n + 1][sum + 1];     // DP - matrix
 	// initialization
-  // here we are setting 1st row and 1st column 
-  // i denotes the size of the array 
-  // j denotes the target sum (subset sum)
+    // here we are setting 1st row and 1st column 
+    // i denotes the size of the array 
+    // j denotes the target sum (subset sum)
 	for (int i = 0; i <= n; i++) { // itereate as long it is less then length of the array
 		for (int j = 0; j <= sum; j++) { 
-			if (i == 0)// when array(i) is empty than there is no meaning of sum of elements so return false
+			if (i == 0)    // when array(i) is empty than there is no meaning of sum of elements so return false
 				t[i][j] = false;
 			if (j == 0) // when sum(j) is zero and there is always a chance of empty subset so return it as true;
 				t[i][j] = true;
 		}
 	}
-// start from 1 since 1st row and column is already considerd 
+    // start from 1 since 1st row and column is already considerd 
 	for (int i = 1; i <= n; i++) {
 		for (int j = 1; j <= sum; j++) {
 			if (arr[i - 1] <= j) 

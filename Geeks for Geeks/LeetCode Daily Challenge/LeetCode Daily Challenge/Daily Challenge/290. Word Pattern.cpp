@@ -22,10 +22,8 @@ public:
 		vector<string> v;
 		int i = 0;
 		string temp = "";
-		while(i < s.size())
-		{
-			if(s[i] == ' ')
-			{
+		while(i < s.size()){
+			if(s[i] == ' '){
 				v.push_back(temp);
 				temp = "";
 			}
@@ -41,6 +39,7 @@ public:
 		{
 			return false;
 		}
+		
 		unordered_map<char, string> m;
 		set<string> st;
 		for(int i = 0; i < pattern.size(); i++)

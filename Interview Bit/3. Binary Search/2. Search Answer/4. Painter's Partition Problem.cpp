@@ -8,24 +8,42 @@
 // configuration where painter 1 paints board 1 and 3 but not 2 is invalid.
 // Return the ans % 10000003
 
+// Input 1:
+//     A = 2
+//     B = 5
+//     C = [1, 10]
+// Output 1:
+//     50
+// Explanation 1:
+//     Possibility 1:- same painter paints both blocks, time taken = 55units
+//     Possibility 2:- Painter 1 paints block 1, painter 2 paints block 2, time take = max(5, 50) = 50
+//     There are no other distinct ways to paint boards.
+//     ans = 50%10000003
+
+// Input 2:
+//     A = 10
+//     B = 1
+//     C = [1, 8, 11, 3]
+// Output 2:
+//     11
 
 //Hint 1
-Hint : Think binary search for the answer.
-If you had a function bool isPossible which could tell you if its possible to paint the boards in time T or less, can you solve the problem ?
+// Hint : Think binary search for the answer.
+// If you had a function bool isPossible which could tell you if its possible to paint the boards in time T or less, can you solve the problem ?
 
 //Solution Approach
-If you have already solved the problem corresponding to hint1, you are already halfway there.
-You can do a binary search for the answer :
+// If you have already solved the problem corresponding to hint1, you are already halfway there.
+// You can do a binary search for the answer :
 
-  start = 0, end = max_time_possible
-  mid = (start + end) / 2
-  if isPossible(mid): 
-  	end = mid - 1
-  else 
-	start = mid + 1
-Now, lets look into how isPossible would be implemented.
-Keep assigning boards to painter greedily till the time taken < mid. If you run out of painters, isPossible = false.
-else isPossible = true.
+//   start = 0, end = max_time_possible
+//   mid = (start + end) / 2
+//   if isPossible(mid): 
+//   	end = mid - 1
+//   else 
+// 	start = mid + 1
+// Now, lets look into how isPossible would be implemented.
+// Keep assigning boards to painter greedily till the time taken < mid. If you run out of painters, isPossible = false.
+// else isPossible = true.
 
 
 

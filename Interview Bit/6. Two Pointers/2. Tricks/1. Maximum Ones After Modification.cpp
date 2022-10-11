@@ -10,15 +10,16 @@
 //  we get a[] = {1, 0, 0, 1, 1, 1, 1}
 
 //Hint 
-We can solve this problem using two pointers technique.
-Let us take a subarray [l, r] which contains at most k zeroes
+// We can solve this problem using two pointers technique.
+// Let us take a subarray [l, r] which contains at most k zeroes
 
 //Solution Approach :-
-Let us take a subarray [l, r] which contains at most k zeroes.
-Let our left pointer be l and right pointer be r. We always maintain our subsegment [l, r] to contain no more than k zeroes by moving the left pointer l.
-Check at every step for maximum size (i.e, r-l+1).
-Space Complexity: O(1)
-Time Complexity: O(N)
+// Let us take a subarray [l, r] which contains at most k zeroes.
+// Let our left pointer be l and right pointer be r. We always maintain our subsegment [l, r] to contain no more than k zeroes by moving the left pointer l.
+// Check at every step for maximum size (i.e, r-l+1).
+// Space Complexity: O(1)
+// Time Complexity: O(N)
+
 
 //First Solution
 int Solution::solve(vector<int> &A, int B) {
@@ -33,15 +34,13 @@ int Solution::solve(vector<int> &A, int B) {
             flips++;
         }
         while(flips > B){
-            //unflip previous 0 because you can't move forward
-            if(A[j]==0){
-                flips--;
+            if(A[j]==0){       //unflip previous 0 because you can't move forward
+                flips--; 
             }
             j++;
         }
         
-        //length of subsegment will be :- i-j+1
-        ans=max(ans,i-j+1);
+        ans=max(ans,i-j+1);   //length of subsegment will be :- i-j+1
         i++;
     }
     return ans;
@@ -66,7 +65,7 @@ int Solution::solve(vector &a, int k) {
 	            r++ ;
 	            len++ ;
 	        }
-	        else{ // now we have to move our l pointer ahead this time
+	        else{                // now we have to move our l pointer ahead this time
 	            if(a[l] == 0){
 	                k++ ;
 	                l++ ;
@@ -89,12 +88,15 @@ int Solution::solve(vector &A, int B) {
 	vector<int>zeros;
 	int ans = 0;
 	for(int i = 0; i<A.size(); i++){
-		if(A[i]==0) 
+		if(A[i]==0) {
 			zeros.push_back(i);
-		if(zeros.size()<=B) 
+		}
+		if(zeros.size()<=B) {
 			ans = max(ans, i+1);
-		else 
+		}
+		else {
 			ans = max(ans, i-zeros[zeros.size()-B-1]);
+		}
 	}
 	return ans;
 }

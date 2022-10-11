@@ -20,24 +20,24 @@
 //     The minimum number of moves required for this is 6.
 
 //Hint :-
-Assume this problem as searching in graph where each block of chess board is vertex.
-How would you define edges in such a graph ?
-When can you travel from vertex i to vertex j ?
+// Assume this problem as searching in graph where each block of chess board is vertex.
+// How would you define edges in such a graph ?
+// When can you travel from vertex i to vertex j ?
 
-Once you have the graph, then it reduces to finding the shortest path in an unweighted graph.
-How do you find the shortest path in an unweighted graph ?
+// Once you have the graph, then it reduces to finding the shortest path in an unweighted graph.
+// How do you find the shortest path in an unweighted graph ?
 
 //Solution Approach :- 
-A knight can move to 8 positions from (x,y). 
-(x, y) -> 
-    (x + 2, y + 1)  
-    (x + 2, y - 1)
-    (x - 2, y + 1)
-    (x - 2, y - 1)
-    (x + 1, y + 2)
-    (x + 1, y - 2)
-    (x - 1, y + 2)
-    (x - 1, y - 2)
+// A knight can move to 8 positions from (x,y). 
+// (x, y) -> 
+//     (x + 2, y + 1)  
+//     (x + 2, y - 1)
+//     (x - 2, y + 1)
+//     (x - 2, y - 1)
+//     (x + 1, y + 2)
+//     (x + 1, y - 2)
+//     (x - 1, y + 2)
+//     (x - 1, y - 2)
 
 // Corresponding to the knight's move, we can define edges. 
 // (x,y) will have an edge to the 8 neighbors defined above. 

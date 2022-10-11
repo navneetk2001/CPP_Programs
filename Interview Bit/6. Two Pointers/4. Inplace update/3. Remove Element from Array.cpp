@@ -7,13 +7,13 @@
 
 
 //Hint 
-You need to modify the original array itself. So you need to keep current like pointer which will point to the index of the array where you can store the next value.
+//You need to modify the original array itself. So you need to keep current like pointer which will point to the index of the array where you can store the next value.
 
 //Solution Approach :-
-Maybe you should try maintaining 2 pointers in the array:
-One pointer iterates over the array
-Other pointer only moves when it finds an element different from ‘elem’.
-In other words, the second pointer only moves when the first pointer is on an element worth keeping in the final array.
+// Maybe you should try maintaining 2 pointers in the array:
+// One pointer iterates over the array
+// Other pointer only moves when it finds an element different from ‘elem’.
+// In other words, the second pointer only moves when the first pointer is on an element worth keeping in the final array.
 
 
 //First Solution
@@ -40,7 +40,9 @@ int Solution::removeElement(vector<int> &A, int B) {
             i++;
             count++;
         }
-        else i++;
+        else {
+            i++;
+        }
     }
     
     A.erase(A.begin(), A.begin()+j+1);

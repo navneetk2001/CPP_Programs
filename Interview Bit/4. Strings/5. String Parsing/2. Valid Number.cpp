@@ -60,16 +60,16 @@ LeetCode explanation :-
 
 
 //Hint :-
-This is a brute force problem with lot of corner cases. You need to properly figure them out before coding.
-Some of them includes dealing with numbers having different signs.
+// This is a brute force problem with lot of corner cases. You need to properly figure them out before coding.
+// Some of them includes dealing with numbers having different signs.
 
 //Solution Approach :-
-Most of the corner cases have already been mentioned in the question itself.
-To start with, make sure you skip the whitespaces.
-Then ignore the ‘+’ or ‘-‘ sign.
-Scan the following string till you find numbers and ‘.’ and confirm at least one digit, less than one ‘.’ and the string not ending with ‘.’.
-Now the remaining string could have ‘e’ followed by a number.
-Confirm if the next character is ‘e’, then again repeat the process of skipping the sign and looking for digits.
+// Most of the corner cases have already been mentioned in the question itself.
+// To start with, make sure you skip the whitespaces.
+// Then ignore the ‘+’ or ‘-‘ sign.
+// Scan the following string till you find numbers and ‘.’ and confirm at least one digit, less than one ‘.’ and the string not ending with ‘.’.
+// Now the remaining string could have ‘e’ followed by a number.
+// Confirm if the next character is ‘e’, then again repeat the process of skipping the sign and looking for digits.
 
 
 // First Method :-
@@ -86,7 +86,9 @@ int Solution::isNumber(const string A) {
 
     for(int i=st;i<=en;i++)
     {
-        if(A[i]>='0' && A[i]<='9')continue;
+        if(A[i]>='0' && A[i]<='9'){
+            continue;
+        }
         else if(A[i]=='.' && deci==0 && e==0)
         {
             deci++;
@@ -100,8 +102,9 @@ int Solution::isNumber(const string A) {
             e++;
            if(A[i+1]=='-')i++;
         }
-        else 
+        else {
         	return 0;
+        }
     }
     return 1;
 }
@@ -116,19 +119,19 @@ public:
         bool dotnot=false, enot=true, intcount=false, intpresent=false;
         if(s.size()==1)
         {
-            if(s[0]>='0' && s[0]<='9')
+            if(s[0]>='0' && s[0]<='9'){
                 return true;
-            else
+            }
+            else{
                 return false;
+            }
         }
-        for(int i=0;i<s.size();i++)
-        {
+        for(int i=0;i<s.size();i++){
             if(s[i] >= '0' && s[i]<='9')
             {
                 intpresent=true;
                 enot =false;
-                if(ecount>0)
-                {
+                if(ecount>0){
                     intcount=true;
                 }
                 continue;
@@ -136,10 +139,12 @@ public:
             else if(s[i] =='-' || s[i]=='+')
             {
                 signcount++;
-                if(i-1 >=0 && (s[i-1]!='e' && s[i-1]!='E'))
+                if(i-1 >=0 && (s[i-1]!='e' && s[i-1]!='E')){
                    return false;
-                if(signcount>2)
+                }
+                if(signcount>2){
                     return false;
+                }
             }
             else if(s[i]=='e' || s[i] == 'E')
             {
@@ -172,8 +177,6 @@ public:
         return true;
     }
 };
-
-
 
 
 //Third Method :-

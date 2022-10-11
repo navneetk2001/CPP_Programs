@@ -11,15 +11,13 @@
 
 
 //Hint 
-Use of additional space is allowed. So, maybe you should try collecting the output in a separate array.
-Note: You need 2 pointers at the head of each array and you just need to compare the values at the head of the arrays to get the current minimum.
+// Use of additional space is allowed. So, maybe you should try collecting the output in a separate array.
+// Note: You need 2 pointers at the head of each array and you just need to compare the values at the head of the arrays to get the current minimum.
 
-Since A is sorted, all values after the pointer are going to be bigger.
-Since B is sorted, all values after the pointer are going to be bigger.
-All values before the pointer have already been put in the result array.
-So, all you need to do is to choose the smaller value from the 2 heads and move on.
-
-//Solution Approach :-
+// Since A is sorted, all values after the pointer are going to be bigger.
+// Since B is sorted, all values after the pointer are going to be bigger.
+// All values before the pointer have already been put in the result array.
+// So, all you need to do is to choose the smaller value from the 2 heads and move on.
 
 
 //First Solution
@@ -56,10 +54,12 @@ void Solution::merge(vector<int> &A, vector<int> &B)
     
     while(j >= 0)
     {
-        if(i >= 0 and A[i] > B[j])
+        if(i >= 0 and A[i] > B[j]){
             A[lastPos--] = A[i--];
-        else
+        }
+        else{
             A[lastPos--] = B[j--];
+        }
     }
     
 }

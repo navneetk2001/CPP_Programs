@@ -39,13 +39,16 @@ Time complexity: O(N) in worst case, where N is the number of nodes in the binar
 
 //First Solution :-
 void helper(TreeNode* A, int B, vector<int>&ans){
-    if(A==NULL) return;
+    if(A==NULL) 
+        return;
     ans.push_back(A->val);
     helper(A->left,B,ans);
 
-    if(ans.back()==B) return;
+    if(ans.back()==B) 
+        return;
     helper(A->right,B,ans);
-    if(ans.back()==B) return;
+    if(ans.back()==B) 
+        return;
     ans.pop_back();
     return;
 }
@@ -75,8 +78,7 @@ bool getPath(TreeNode *root, vector<int> &arr, int x) {
     // else check whether the required node lies
     // in the left subtree or right subtree of
     // the current node
-    if (getPath(root->left, arr, x) ||
-        getPath(root->right, arr, x))
+    if (getPath(root->left, arr, x) || getPath(root->right, arr, x))
         return true;
      
     // required node does not lie either in the

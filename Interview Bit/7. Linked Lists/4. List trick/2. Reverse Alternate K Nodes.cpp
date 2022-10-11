@@ -17,30 +17,30 @@
 //  4 -> 1 -> 6 -> 6 -> 10 -> 4
 
 //Hint :-
-Process 2k nodes and recursively call for rest of the list.
-Please solve this before solve this question.
+// Process 2k nodes and recursively call for rest of the list.
+// Please solve this before solve this question.
 
 //Solution Approach :-
-Method 1:((Process 2k nodes and recursively call for rest of the list).
-kAltReverse(ListNode *head, int k)
-Reverse first k nodes.
-In the modified list head points to the kth node. So change next of head to (k+1)th node
-Move the current pointer to skip next k nodes.
-Call the kAltReverse() recursively for rest of the n - 2k nodes.
-Return new head of the list.
-Time Complexity: O(N)
+// Method 1:((Process 2k nodes and recursively call for rest of the list).
+// kAltReverse(ListNode *head, int k)
+// Reverse first k nodes.
+// In the modified list head points to the kth node. So change next of head to (k+1)th node
+// Move the current pointer to skip next k nodes.
+// Call the kAltReverse() recursively for rest of the n - 2k nodes.
+// Return new head of the list.
+// Time Complexity: O(N)
 
 
-Method 2:(Process k nodes and recursively call for rest of the list)
-The method 1 reverses the first k node and then moves the pointer to k nodes ahead. So method 1 uses two while loops and processes 2k nodes in one recursive call.
-This method processes only k nodes in a recursive call. It uses a third bool parameter b which decides whether to reverse the k elements or simply move the pointer.
-_kAltReverse(ListNode *head, int k, bool b)
+// Method 2:(Process k nodes and recursively call for rest of the list)
+// The method 1 reverses the first k node and then moves the pointer to k nodes ahead. So method 1 uses two while loops and processes 2k nodes in one recursive call.
+// This method processes only k nodes in a recursive call. It uses a third bool parameter b which decides whether to reverse the k elements or simply move the pointer.
+// _kAltReverse(ListNode *head, int k, bool b)
 
-If b is true, then reverse first k nodes.
-If b is false, then move the pointer k nodes ahead.
-Call the kAltReverse() recursively for rest of the n - k nodes and link rest of the modified list with end of first k nodes.
-Return new head of the list.
-Time Complexity: O(N)
+// If b is true, then reverse first k nodes.
+// If b is false, then move the pointer k nodes ahead.
+// Call the kAltReverse() recursively for rest of the n - k nodes and link rest of the modified list with end of first k nodes.
+// Return new head of the list.
+//Time Complexity: O(N)
 
 
 
@@ -60,25 +60,21 @@ ListNode* Solution::solve(ListNode* A, int B) {
         count++;
     }
      
-    /* 2) Now head points to the kth node.
-    So change next  of head to (k+1)th node*/
+    /* 2) Now head points to the kth node. So change next  of head to (k+1)th node*/
     if(A != NULL)
         A->next = current;
  
-    /* 3) We do not want to reverse next k
-       nodes. So move the current
-        pointer to skip next k nodes */
+    /* 3) We do not want to reverse next k nodes. So move the current pointer to skip next k nodes */
     count = 0;
     while(count < B-1 && current != NULL ){
         current = current->next;
         count++;
     }
  
-    /* 4) Recursively call for the list
-    starting from current->next. And make
-    rest of the list as next of first node */
-    if(current != NULL)
+    /* 4) Recursively call for the list starting from current->next. And make rest of the list as next of first node */
+    if(current != NULL){
         current->next = solve(current->next, B);
+    }
  
     /* 5) prev is new head of the input list */
     return prev;
@@ -87,8 +83,7 @@ ListNode* Solution::solve(ListNode* A, int B) {
 
 
 //Second Method :-
-/* Function to reverse alternate k nodes and
-return the pointer to the new head node */
+/* Function to reverse alternate k nodes and return the pointer to the new head node */
 Node* kAltReverse(struct Node* head, int k)
 {
     Node* prev = NULL;

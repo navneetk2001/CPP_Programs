@@ -27,8 +27,9 @@ int Solution::isPalindrome(string A) {
     }
 
     int l = 0;
-    while(s[l]!='\0')
+    while(s[l]!='\0'){
         l++;
+    }
     
     int i=0,j=l-1;
     while(i<j)
@@ -47,13 +48,13 @@ int Solution::isPalindrome(string A) {
 //Second Method :-
 int Solution::isPalindrome(string a) {
 	int n=a.length();
-	stacks;
-	queueq;
+	stack<char>s;
+	queue<char>q;
 	for(int i=0;i<n;i++){
 		if(isupper(a[i])){
 			a[i]=tolower(a[i]);
 		}
-		if(a[i]<=‘z’ && a[i]>=‘a’ || a[i]>=48 && a[i]<=57){
+		if(a[i]<='z' && a[i]>='a' || a[i]>=48 && a[i]<=57){
 			s.push(a[i]);
 			q.push(a[i]);
 		}
@@ -76,7 +77,6 @@ int Solution::isPalindrome(string a) {
 class Solution {
     public:
         bool isPalindrome(string s) {
-
             int i = 0, j = (int)s.size() - 1;
             while(i < j)
             {

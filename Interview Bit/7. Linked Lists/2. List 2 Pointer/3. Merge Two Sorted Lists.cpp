@@ -8,12 +8,12 @@
 
 
 //Solution Approach
-First thing to note is that all you would want to do is modify the next pointers. You don’t need to create new nodes.
-At every step, you choose the minumum of the current head X on the 2 lists, and modify your answer’s next pointer to X. You move the current pointer on the said list and the current answer.
+// First thing to note is that all you would want to do is modify the next pointers. You don’t need to create new nodes.
+// At every step, you choose the minumum of the current head X on the 2 lists, and modify your answer’s next pointer to X. You move the current pointer on the said list and the current answer.
 
-Corner case,
-Make sure that at the end of the loop, when one of the list goes empty, you do include remaining elemnts from the second list into your answer.
-Test case : 1->2->3 4->5->6
+// Corner case,
+// Make sure that at the end of the loop, when one of the list goes empty, you do include remaining elemnts from the second list into your answer.
+// Test case : 1->2->3 4->5->6
 
 // First Method :-
 ListNode* Solution::mergeTwoLists(ListNode* A, ListNode* B) {
@@ -51,16 +51,14 @@ ListNode* Solution::mergeTwoLists(ListNode* A, ListNode* B) {
 //Second Method :-
 ListNode* Solution::mergeTwoLists(ListNode* A, ListNode* B) 
 {
-    if(!A)
-    {
+    if(!A){
         return B;
     }
-    if(!B)
-    {
+    if(!B){
         return A;
     }
-    if(A->val>B->val)
-    {
+
+    if(A->val>B->val){
         return mergeTwoLists(B,A);
     }
     A->next=mergeTwoLists(A->next,B);

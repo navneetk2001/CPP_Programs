@@ -8,13 +8,13 @@
 
 
 //Hint :-
-Note that moving in the reverse order in the list is not feasible unless you use additional memory. This indicates that we need to reverse some part of the list.
-Can you figure out a solution reversing a part of the list ?
+// Note that moving in the reverse order in the list is not feasible unless you use additional memory. This indicates that we need to reverse some part of the list.
+// Can you figure out a solution reversing a part of the list ?
 
 //Solution Approach :-
-1 Break the list from middle into 2 lists.
-2) Reverse the latter half of the list.
-3) Now merge the lists so that the nodes alternate.
+// 1 Break the list from middle into 2 lists.
+// 2) Reverse the latter half of the list.
+// 3) Now merge the lists so that the nodes alternate.
 
 
 // First Method :-
@@ -86,11 +86,11 @@ ListNode* Solution::reorderList(ListNode* A) {
 
 	ListNode* h1=A;
 	while(h1!=NULL && h2!=NULL){   //changing links
-		ListNode* th2= h2->next;
+		ListNode* th2= h2->next;       //storing the next pointer of both linked list for further use
 		ListNode* th1= h1->next;
-		h1->next=h2;
-		h2->next=th1;
-		h1=th1;
+		h1->next=h2;                   //now connect first next with second start
+		h2->next=th1;                  //also connect now second next with first next saved
+		h1=th1;                        //update both pointers
 		h2=th2;
 	}
 	return A;

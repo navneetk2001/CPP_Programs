@@ -15,21 +15,21 @@
 
 
 //Hint :-
-An input string is valid if:
-Open brackets must be closed by the same type of brackets.
-Open brackets must be closed in the correct order.
-Note that an empty string is also considered valid.
-The problem can be solved by using a stack.
+// An input string is valid if:
+// Open brackets must be closed by the same type of brackets.
+// Open brackets must be closed in the correct order.
+// Note that an empty string is also considered valid.
+// The problem can be solved by using a stack.
 
 //Solution Approach :-
-Algorithm:
-Declare a character stack S.
-Now traverse the expression string exp.
-If the current character is a starting bracket ‘(‘ then push it to stack.
-If the current character is a closing bracket ‘)’ then pop from stack and if the popped character is the matching starting bracket then fine else parenthesis are not balanced.
-After complete traversal, if there is some starting bracket left in stack then “-1”
-Time Complexity: O(len(A))
-Auxiliary Space: O(len(A)) for stack.
+// Algorithm:
+// Declare a character stack S.
+// Now traverse the expression string exp.
+// If the current character is a starting bracket ‘(‘ then push it to stack.
+// If the current character is a closing bracket ‘)’ then pop from stack and if the popped character is the matching starting bracket then fine else parenthesis are not balanced.
+// After complete traversal, if there is some starting bracket left in stack then “-1”
+// Time Complexity: O(len(A))
+// Auxiliary Space: O(len(A)) for stack.
 
 
 //First Solution :-
@@ -46,10 +46,12 @@ int Solution::solve(string A) {
         else st.push(A[i]);
     }
 
-    if(st.size()==1) 
+    if(st.size()==1) {
         return 1;
-    else 
+    }
+    else {
         return 0;
+    }
 }
 
 //Second Solution :-

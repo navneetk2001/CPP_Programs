@@ -12,17 +12,17 @@
 //  542
 
 //Hint :-
-The idea is to consider every digit and swap it with digits
-following it one at a time and see if it leads to the maximum number.
-The process is repeated B times.
+// The idea is to consider every digit and swap it with digits
+// following it one at a time and see if it leads to the maximum number.
+// The process is repeated B times.
 
 //Solution Approach :- 
-1) Create a global variable which will store the maximum string or number.
-2) Define a recursive function that takes the string as number and value of k
-3 Run a nested loop, the outer loop from 0 to length of string -1 and inner loop from i+1 to end of string.
-4) Swap the ith and jth character and check if the string is now maximum and update the maximum string.
-5) Call the function recursively with parameters: string and k-1.
-6 Now again swap back the ith and jth character.
+// 1) Create a global variable which will store the maximum string or number.
+// 2) Define a recursive function that takes the string as number and value of k
+// 3 Run a nested loop, the outer loop from 0 to length of string -1 and inner loop from i+1 to end of string.
+// 4) Swap the ith and jth character and check if the string is now maximum and update the maximum string.
+// 5) Call the function recursively with parameters: string and k-1.
+// 6 Now again swap back the ith and jth character.
 
 
 //First Solution :-
@@ -31,8 +31,9 @@ The process is repeated B times.
 string ans="";
 void find(string a,int k){
     if(k==0){    //if no swaps left
-        if(ans<a) 
+        if(ans<a) {
         	ans=a;
+        }
         return;
     }
 
@@ -80,10 +81,13 @@ string Solution::solve(string A, int B)
 
 //Third Solution :- 
 string generate (string &A, int B, int index){
-    if(B == 0)              return A;
+    if(B == 0){
+        return A;
+    }
     string temp = A;
     for(int i=0; i<A.length(); i++) {
-        if( i == index )    continue;
+        if(i == index) 
+            continue;
         swap(A[index], A[i]);
         temp = max(temp, generate(A, B-1, i));
     }

@@ -5,10 +5,10 @@
 
 
 //Solution Approach :-
-Lets first look at the problem of swapping 2 nodes.
+// Lets first look at the problem of swapping 2 nodes.
 
-Method 1: Just swap the values in the 2 nodes. In most cases, this won’t be a permissible solution.
-Method 2: Move around the pointers.
+// Method 1: Just swap the values in the 2 nodes. In most cases, this won’t be a permissible solution.
+// Method 2: Move around the pointers.
 
 
 // First Method :-
@@ -64,7 +64,31 @@ public:
 
 
 //Third Method :-
-
+class Solution{
+    public:
+    Node* pairWiseSwap(struct Node* head) 
+    {
+        if(!head or !head->next){
+            return head;
+        }
+        
+        Node *dummy = new Node(-1);
+        Node *prevNode = dummy;
+        Node *currNode = head;
+        
+        while(currNode!=NULL && currNode->next!=NULL)
+        {
+            prevNode->next = currNode->next;
+            currNode->next = prevNode->next->next;
+            prevNode->next->next = currNode;
+            
+            prevNode = currNode;
+            currNode = currNode->next;
+        }
+        
+        return dummy->next;
+    }
+};
 
 
 

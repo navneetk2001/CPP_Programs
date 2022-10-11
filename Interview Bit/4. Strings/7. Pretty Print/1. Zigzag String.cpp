@@ -16,20 +16,20 @@
 
 
 //Solution Approach :-
-Just look at simply simulating what is being told in the problem.
-Follow the simple steps:
+// Just look at simply simulating what is being told in the problem.
+// Follow the simple steps:
 
-You need to maintain numRows number of strings S[numRows].
-And then populating string S in each row in zigzag fashion.
-Finally concatenate S[0]....S[numRows-1] to get the answer.
+// You need to maintain numRows number of strings S[numRows].
+// And then populating string S in each row in zigzag fashion.
+// Finally concatenate S[0]....S[numRows-1] to get the answer.
 
 
 //First Solution :-
 
 //Approach :-
-str = "GEEKSFORGEEKS"
-n = 3
-Output: GSGSEKFREKEOE
+// str = "GEEKSFORGEEKS"
+// n = 3
+// Output: GSGSEKFREKEOE
 
 // G E E K S F O R G E E K S
 // 0 1 2 1 0 1 2 1 0 1 2 1 0
@@ -41,8 +41,9 @@ Output: GSGSEKFREKEOE
 class Solution{
     public:
     string convert(string s, int n) {
-        if(n==1)
+        if(n==1){
         	return s;
+        }
 
         string ans[n];
         int curRow=0, mod=1;
@@ -56,6 +57,7 @@ class Solution{
         	}
         	curRow+=mod;
         }
+        
         s.clear();
         for(auto e:ans){
         	s.append(e);
@@ -71,6 +73,7 @@ class Solution{
     string convert(string s, int numRows) {
         vector<string>v(numRows,"");
         int i=0, n=s.length();
+        
         while(i<n){
         	for(int j=0;j<numRows && i<n;j++){
         		v[j].push_back(s[i++]);
@@ -84,7 +87,6 @@ class Solution{
         for(auto i:v){
         	res+=i;
         }
-        
         return res;
     }
 };
@@ -92,16 +94,19 @@ class Solution{
 
 //Third Solution :-
 string convert(string s, int k) {
-    if(k == 1)
+    if(k == 1){
         return s;
+    }
     int n = s.size(), j = 0;
-    vector <vector<char>> v(k);
+    vector<vector<char>> v(k);
     bool flg = true;
+    
     for(int i=0; i<n; i++){
         v[j].push_back(s[i]);
         j += (flg == true) ? 1 : -1;
-        if(j == 0 || j == k-1)
+        if(j == 0 || j == k-1){
             flg = !flg;
+        }
     }
     string str = "";
     for(auto i:v){
@@ -116,8 +121,9 @@ string convert(string s, int k) {
 class Solution {
 public:
     string convert(string s, int numRows) {
-
-        if (numRows == 1) return s;
+        if(numRows == 1) {
+            return s;
+        }
 
         string ret;
         int n = s.size();
@@ -126,8 +132,9 @@ public:
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j + i < n; j += cycleLen) {
                 ret += s[j + i];
-                if (i != 0 && i != numRows - 1 && j + cycleLen - i < n)
+                if (i != 0 && i != numRows - 1 && j + cycleLen - i < n){
                     ret += s[j + cycleLen - i];
+                }
             }
         }
         return ret;

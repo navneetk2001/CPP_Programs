@@ -8,16 +8,16 @@
 // Modify array so that it becomes : [0 0 1 1 2 2]
 
 //Solution Approach :-
-There are multiple approaches possible here. We need to make sure we do not allocate extra memory.
-Approach 1:
+// There are multiple approaches possible here. We need to make sure we do not allocate extra memory.
+// Approach 1:
 
-Count the number of red, white and blue balls.
-Then in another pass, set initial redCount number of cells as 0, next whiteCount cell as 1 and next bluecount cells as 2.
-*Requires 2 pass of the array. *
+// Count the number of red, white and blue balls.
+// Then in another pass, set initial redCount number of cells as 0, next whiteCount cell as 1 and next bluecount cells as 2.
+// *Requires 2 pass of the array. *
 
-**Approach 2: **
-Swap the 0s to the start of the array maintaining a pointer, and 2s to the end of the array.
-1s will automatically be in their right position.
+// **Approach 2: **
+// Swap the 0s to the start of the array maintaining a pointer, and 2s to the end of the array.
+// 1s will automatically be in their right position.
 
 //First Solution :- Inplace Sorting
 void Solution::sortColors(vector<int> &nums) {
@@ -44,16 +44,13 @@ void Solution::sortColors(vector<int> &nums) {
 
 //Second Solution
 void Solution::sortColors(vector<int> &A) {
-
 	map<int,int>mp;
-	for(int i=0;i<A.size();i++)
-	{
+	for(int i=0;i<A.size();i++){
 	    mp[A[i]]++;
 	}
 
 	vector<int>ans;
-	for(int i=0;i<=2;i++)
-	{
+	for(int i=0;i<=2;i++){
 	    while(mp[i]--)
 	    ans.push_back(i);
 	}
@@ -64,8 +61,7 @@ void Solution::sortColors(vector<int> &A) {
 //Third Solution
 void Solution::sortColors(vector<int> &A) {
     int red =0, blue =A.size()-1, color = 0;
-    while(color <= blue)//we arrange 0's and 2's, 1's will already be in place
-    {
+    while(color <= blue){            //we arrange 0's and 2's, 1's will already be in place
         if(A[color]==0)
         {
             swap(A[red++],A[color++]);

@@ -2,7 +2,7 @@
 // Expectation is that you will ask for correct clarification or you will state your assumptions before you start coding.
 
 // Implement strStr().
-// strstr - locate a substring ( needle ) in a string ( haystack ).
+// strstr - locate a substring (needle) in a string (haystack).
 // Try not to use standard library string functions for this question.
 // Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 // NOTE: String A is haystack, B is needle.
@@ -13,14 +13,14 @@
 
 
 //Solution Approach :-
-Let us first think about a simpler problem. How do you find out if 2 strings are equal?
-Implementing strstr is just plain simple simulation.
-Consider every index i for the answer. Find if the following 2 strings are equal:
-1 Needle string and,
-2 String haystack from index i with length the same as needle’s length
-Note that the complexity of this solution is O(M*N) where M is length of haystack and N is length of needle.
-If you are feeling more adventurous, try solving it in O(M).
-*Hint: KMP Algorithm**
+// Let us first think about a simpler problem. How do you find out if 2 strings are equal?
+// Implementing strstr is just plain simple simulation.
+// Consider every index i for the answer. Find if the following 2 strings are equal:
+// 1 Needle string and,
+// 2 String haystack from index i with length the same as needle’s length
+// Note that the complexity of this solution is O(M*N) where M is length of haystack and N is length of needle.
+// If you are feeling more adventurous, try solving it in O(M).
+// *Hint: KMP Algorithm**
 
 
 
@@ -77,31 +77,28 @@ int Solution::strStr(const string A, const string B) {
 
 
 //Fourth Solution :- C++ KMP Approach
-vector<int> prefix(string str)
-{
+vector<int> prefix(string str){
 	int n=str.length();
 	vector<int> lcs(n);
 	int i;
 	int temp = 0;
-	lcs.push_back(0);
-	for(i=1;i<n;i++)
-	{
+	
+    lcs.push_back(0);
+	for(i=1;i<n;i++){
 	    int j=lcs[i-1];
 	    while(j>0 && str[i]!=str[j])
 	    {
 	        j=lcs[j-1];
 	    }
-	    if(str[i]==str[j])
+	    if(str[i]==str[j]){
 	        j++;
+        }
 	    lcs[i]=j;
-	    
-	    
 	}
 	return lcs;
 }
 
-int KMP(string text,string pattern)
-{
+int KMP(string text,string pattern){
 	int m=text.length(),n=pattern.length();
 	vector<int> lcs = prefix(pattern);
 	int i=0,j=0;
@@ -155,11 +152,6 @@ int Solution::strStr(const string A, const string B) {
 
 //Sixth Solution :-
 int Solution::strStr(const string &haystack, const string &needle) {
-    // Do not write main() function.
-    // Do not read input, instead use the arguments to the function.
-    // Do not print the output, instead return values as specified
-    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
-    
     int n,m,flag,i,j,ans;
     n=haystack.length();
     m=needle.length();
@@ -195,41 +187,40 @@ int Solution::strStr(const string &haystack, const string &needle) {
 
 
 
-//Another Solution :-
+//Another Solution :- 
 int Solution::strStr(const string A, const string B) {
+    //A is the haystack and the B is the needle 
+    //we have to find the first index of needle in the haystack and return it 
+    //first we need to find whether needle exists in haystack or not
+    // we can create a window that checks whether the string in the window is the correct or not
 
-//A is the haystack and the B is the needle 
-//we have to find the first index of needle in the haystack and return it 
+    int size_of_window=B.size();
+    int n=A.size();
 
-//first we need to find whether needle exists in haystack or not
-// we can create a window that checks whether the string in the window is the correct or not
+    int i=0,j=0;
+    int index=0;
 
-int size_of_window=B.size();
-int n=A.size();
-
-int i=0,j=0;
-int index=0;
-
-int flag=0;
-while(i<n)
-{
-    if(A[i]!=B[j])
-    {
-        j=0;
-        // int temp=i;
-        i=index+1;
-        index=i;
-        continue;
+    int flag=0;
+    while(i<n){
+        if(A[i]!=B[j]){
+            j=0;
+            i=index+1;
+            index=i;
+            continue;
+        }
+        else{
+            j++; 
+        }
+        if(j==B.size()){ 
+            flag=1;
+            break;
+        }
+        i++;
     }
-    else
-        j++; 
-    if(j==B.size())
-       { flag=1;break;}
-    i++;
-}
 
-if(index>=n || flag==0)
-    return -1;
-return index;
+    if(index>=n || flag==0){
+        return -1;
+    }
+    return index;
 
 }

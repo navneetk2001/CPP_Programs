@@ -2,37 +2,54 @@
 // Count the number of ways to split all the elements of the array into 3 contiguous parts so that the sum of elements in each part is the same.
 // Such that : sum(B[1],..B[i]) = sum(B[i+1],...B[j]) = sum(B[j+1],...B[n]) 
 
+// Input 1:
+//  A = 5
+//  B = [1, 2, 3, 0, 3]
+// Output 1: 2
+// Explanation 1: There are no 2 ways to make partitions -
+//  1. (1,2)+(3)+(0,3).
+//  2. (1,2)+(3,0)+(3).
+
+// Input 2:
+//  A = 4
+//  B = [0, 1, -1, 0]
+// Output 2: 1
+// Explanation 2:
+//  There is only 1 way to make partition -
+//  1. (0)+(-1,1)+(0).
 
 // Hint 1
-First think when this condition is possible.
-For dividing array in 3 part we have a condition on the sum that it should be divisible by 3.
-Then think how can we access sum of ranges to check the condition for equal sum.
+// First think when this condition is possible.
+// For dividing array in 3 part we have a condition on the sum that it should be divisible by 3.
+// Then think how can we access sum of ranges to check the condition for equal sum.
 
 
 // Solution Approach
-If the sum of all the elements of the array is not divisible by 3 return 0. Else it is obvious that the sum of each part of each contiguous part will be equal to the sum of all elements divided by 3.
-Create an array of the same size as a given array whose i-th index holds the value of the sum of elements from indices 0 to i of the given array. Let’s call it prefix array
-Create another array of the same size as a given array whose i-th index the value of sum of elements from indices i to A-1 of the given array. Let’s call it suffix array.The idea is simple, we start traversing the prefix array and suppose at the i-th index of the prefix array the value of prefix array is equal to (sum of all elements of given array)/3.
-For i found in the above step we look into the suffix array from (i+2)-th index and wherever the value of suffix array is equal to (sum of all elements of given array)/3, we increase the counter variable by 1.
-To implement step 4 we traverse suffix array and wherever the value of suffix array is equal to the sum of all elements of given array/3 we push that index of suffix array into the vector. And we do a binary search in the vector to calculate the number of values in suffix array which are as according to step 4.
-We search in suffix array because there should be at least 1 element between the first and third part.
-Time Complexity is O(Alog A)
+// If the sum of all the elements of the array is not divisible by 3 return 0. Else it is obvious that the sum of each part of each contiguous part will be equal to the sum of all elements divided by 3.
+// Create an array of the same size as a given array whose i-th index holds the value of the sum of elements from indices 0 to i of the given array. Let’s call it prefix array
+// Create another array of the same size as a given array whose i-th index the value of sum of elements from indices i to A-1 of the given array. Let’s call it suffix array.The idea is simple, we start traversing the prefix array and suppose at the i-th index of the prefix array the value of prefix array is equal to (sum of all elements of given array)/3.
+// For i found in the above step we look into the suffix array from (i+2)-th index and wherever the value of suffix array is equal to (sum of all elements of given array)/3, we increase the counter variable by 1.
+// To implement step 4 we traverse suffix array and wherever the value of suffix array is equal to the sum of all elements of given array/3 we push that index of suffix array into the vector. And we do a binary search in the vector to calculate the number of values in suffix array which are as according to step 4.
+// We search in suffix array because there should be at least 1 element between the first and third part.
+// Time Complexity is O(Alog A)
 
 
 //Efficient Approach [ O(A) solution ] :
-If sum of all the elements of the array is not divisible by 3, return 0.
-It is obvious that the sum of each part of each contiguous part will be equal to the sum of all elements divided by 3.
-Let’s create an array cnt[ ], where cnt[ i ] equals 1, if the sum of elements from ith to Ath equals Array_Sum/3 else 0. Now, calculate the cumulative sum of the cnt array from the last index.
-Thus, we receive very simple solution: for each prefix of initial array 1…i with the sum that equals Array_Sum/3 we need to add to the answer sums[ i+2 ].
+// If sum of all the elements of the array is not divisible by 3, return 0.
+// It is obvious that the sum of each part of each contiguous part will be equal to the sum of all elements divided by 3.
+// Let’s create an array cnt[ ], where cnt[ i ] equals 1, if the sum of elements from ith to Ath equals Array_Sum/3 else 0. Now, calculate the cumulative sum of the cnt array from the last index.
+// Thus, we receive very simple solution: for each prefix of initial array 1…i with the sum that equals Array_Sum/3 we need to add to the answer sums[ i+2 ].
 
 
 // First Method :- 
 int Solution::solve(int A, vector<int> &B) {
     int sum=0;
-    for(int i=0; i<A; i++)
-    sum +=B[i];
-    if(sum%3 != 0)
+    for(int i=0; i<A; i++){
+        sum +=B[i];
+    }
+    if(sum%3 != 0){
         return 0;
+    }
     
     sum /= 3;
     int s = 0;
@@ -41,10 +58,12 @@ int Solution::solve(int A, vector<int> &B) {
 
     for(int i=0; i<A-1; i++){
         s += B[i];
-        if( s==(2*sum))
+        if(s==(2*sum)){
             count += left;
-        if(s==sum)
+        }
+        if(s==sum){
             left++;
+        }
     }
 
     return count;

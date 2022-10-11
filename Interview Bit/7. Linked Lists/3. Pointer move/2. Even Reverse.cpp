@@ -12,17 +12,66 @@ Output 2:
  1 -> 2 -> 3
 
 
-//Solution Approach
-Store the even positioned and odd positioned
-nodes in 2 vectors. now reverse the even position vectors
-and then Recombine them to form a linked list.
-All of this will happen in O(n) time.
+//Solution Approach :- 
+// Store the even positioned and odd positioned
+// nodes in 2 vectors. now reverse the even position vectors
+// and then Recombine them to form a linked list.
+// All of this will happen in O(n) time.
+
+
+//Solution Approach :-
+ListNode* reverseList(ListNode* head) {
+    if(!head || !(head->next))  return head;
+    auto res = reverseList(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return res;
+}
+
+ListNode* Clone(ListNode* list) {
+    if (list == NULL) return NULL;
+
+    ListNode* result = new ListNode(list->val);
+    result->next = Clone(list->next);
+    return result;
+}
+
+ListNode* Solution::solve(ListNode* A) {
+    int count = 0;
+    ListNode* sid = A;
+    while(sid){
+        count++;
+        sid=sid->next;
+    }
+
+    ListNode* temp = A;
+    ListNode* dummy1 = Clone(A);
+
+    ListNode* revhead = reverseList(dummy1);
+    
+    if(count%2 == 0){
+        while(temp && temp->next && revhead && revhead->next){
+            swap(revhead->val, temp->next->val);
+            temp = temp->next->next;
+            revhead = revhead->next->next;
+        }
+    }
+    else{
+        while(temp && temp->next && revhead && revhead->next){
+            swap(revhead->next->val, temp->next->val);
+            temp = temp->next->next;
+            revhead = revhead->next->next;
+        }
+    }    
+    return A;
+}
+
 
 
 //First Method :-
 ListNode* Solution::solve(ListNode* A) {
 	int i ,len=0;
-	vector<int>v;
+	vector<int> v;
 	ListNode *head=A;
 	while(head!=NULL){
 		v.push_back(head->val);
@@ -56,28 +105,22 @@ ListNode* Solution::solve(ListNode* A) {
 //Another Method:-
 ListNode* Solution::solve(ListNode* A) {
     ListNode* odd = head;
-    //If 3 or less elemnts are present in the linked list nothing to be done
-    if(odd == NULL or odd->next==NULL or odd->next->next==NULL){
+    if(odd == NULL or odd->next==NULL or odd->next->next==NULL){     //If 3 or less elemnts are present in the linked list nothing to be done
         return A;
     }
     
     //Initialize the start of even list
-    ListNode* even=NULL;
+    ListNode* even = NULL;
 
     //Traverse the list :- Step 1
     while(odd and odd->next){
-        //store the even node in a temp variable
-        ListNode* temp=odd->next;
+        ListNode* temp=odd->next;         //store the even node in a temp variable
+        odd->next=temp->next;                     //remove the even node
 
-        //remove the even node
-        odd->next=temp->next;
-
-        //Add the even node stored in the temp variable at the beginning of even list
-        temp->next=even;
+        temp->next=even;        //Add the even node stored in the temp variable at the beginning of even list
         even=temp;
 
-        //Move odd to the next odd node
-        odd=odd->next;
+        odd=odd->next;        //Move odd to the next odd node
     }
 
     //Reset odd to head
